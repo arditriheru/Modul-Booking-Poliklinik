@@ -18,9 +18,12 @@
         </div><!-- /.row -->
         <?php
             if(isset($_POST['submit'])){
+              session_start();
             // koneksi database
             include '../koneksi.php';
             // menangkap data yang di kirim dari form
+            date_default_timezone_set("Asia/Jakarta");
+            $_SESSION['tanggal'] = date('Y-m-d');
             $id_dokter  = $_POST['id_dokter'];
             $senin      = $_POST['senin'];
             $selasa     = $_POST['selasa'];
