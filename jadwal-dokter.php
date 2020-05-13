@@ -20,7 +20,8 @@
           <div class="col-lg-12">
             <div class="row">
               <div class="col-xs-12">
-                <div align="right">Diperbarui <?php echo format_update($update);?></div>
+                <div align="right">Diperbarui <?php echo format_update($update);?>
+                <?php echo $jam;?></div>
                 <h4 class="bluetext"><b>Dokter Spesialis Anak</b></h4>
             <table class="table table-bordered table-hover table-striped tablesorter">
                 <thead>

@@ -4,6 +4,7 @@
 	include '../koneksi.php';
 		date_default_timezone_set("Asia/Jakarta");
 		$_SESSION['tanggal'] = date('Y-m-d');
+		$_SESSION['jam']     = date('h:i:s');
 		$id_jadwal = $_GET['id_jadwal'];
 		$hapus=mysqli_query($koneksi,"DELETE FROM jadwal WHERE id_jadwal='$id_jadwal'");
 		if($hapus){

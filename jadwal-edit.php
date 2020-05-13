@@ -39,7 +39,8 @@
             include '../koneksi.php';
             // menangkap data yang di kirim dari form
             date_default_timezone_set("Asia/Jakarta");
-            $_SESSION['tanggal'] = date('Y-m-d');
+            $_SESSION['tanggal']  = date('Y-m-d');
+            $_SESSION['jam']      = date('h:i:s');
             $senin      = $_POST['senin'];
             $selasa     = $_POST['selasa'];
             $rabu       = $_POST['rabu'];
