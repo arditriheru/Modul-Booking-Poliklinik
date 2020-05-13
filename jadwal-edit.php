@@ -1,6 +1,6 @@
 <?php include "readme.php";?>
 <?php include "views/header.php"; ?>
-<?php  $id_jadwal = $_GET['id_jadwal']; ?>
+<?php $id_jadwal = $_GET['id_jadwal']; ?>
     <nav>
     <div id="wrapper">
       <?php include "menu.php"; ?>   
@@ -34,9 +34,12 @@
         ?>
         <?php
             if(isset($_POST['submit'])){
+            session_start();
             // koneksi database
             include '../koneksi.php';
             // menangkap data yang di kirim dari form
+            date_default_timezone_set("Asia/Jakarta");
+            $_SESSION['tanggal'] = date('Y-m-d');
             $senin      = $_POST['senin'];
             $selasa     = $_POST['selasa'];
             $rabu       = $_POST['rabu'];
