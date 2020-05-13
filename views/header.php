@@ -2,6 +2,7 @@
     error_reporting(0);
     session_start();
     $update = $_SESSION['tanggal'];
+    $jam    = $_SESSION['jam'];
         function format_update($update)
             {
                 $bulan = array (1 =>   'Januari',
