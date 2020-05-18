@@ -36,4 +36,17 @@
     <link href="../css/sb-admin.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="../css/sweetalert.css">
+    <style>
+    .bluetext {
+    color: #008cba;
+    }
+    .navbar-rachmi{
+        background-color:#e67e22;
+        border-color:#d35400
+    }
+    .navbar-brand{
+        color:#ffffff;
+    }
+
+</style>
   </head>
