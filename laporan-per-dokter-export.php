@@ -5,24 +5,70 @@
     $akhir      = $_POST['akhir'];
     $id_sesi    = $_POST['id_sesi'];
     header("Content-type: application/ms-excel");
-    header("Content-Disposition: attachment; filename=laporan-booking-per-dokter ".date('d-m-Y').".xls");
+    header("Content-Disposition: attachment; filename=list-pasien-".date('d-m-Y').".xls");
+
+                  function format_awal($awal)
+                    {
+                        $bulan = array (1 =>   'Januari',
+                                    'Februari',
+                                    'Maret',
+                                    'April',
+                                    'Mei',
+                                    'Juni',
+                                    'Juli',
+                                    'Agustus',
+                                    'September',
+                                    'Oktober',
+                                    'November',
+                                    'Desember'
+                                );
+                        $split = explode('-', $awal);
+                        return $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
+                    }
+                  function format_akhir($akhir)
+                    {
+                        $bulan = array (1 =>   'Januari',
+                                    'Februari',
+                                    'Maret',
+                                    'April',
+                                    'Mei',
+                                    'Juni',
+                                    'Juli',
+                                    'Agustus',
+                                    'September',
+                                    'Oktober',
+                                    'November',
+                                    'Desember'
+                                );
+                        $split = explode('-', $akhir);
+                        return $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
+                    }
+
+    include '../koneksi.php';
+    $title = mysqli_query($koneksi,
+        "SELECT *, dokter.nama_dokter, sesi.nama_sesi
+            FROM booking, dokter, sesi
+            WHERE booking.id_dokter=dokter.id_dokter
+            AND booking.id_sesi=sesi.id_sesi
+            AND booking.id_sesi = '$id_sesi'
+            AND booking.id_dokter='$id_dokter';");
+        while($value = mysqli_fetch_array($title)){
+            $nama_dokter    = $value['nama_dokter'];
+            $nama_sesi      = $value['nama_sesi'];
+    }
 ?>
 <html>
     <body>
     <table align="center" border="1">
-        <h2 align="center">Laporan Per Dokter</h2>
-        <h3 align="center">Tanggal : <?php echo $awal ?> - <?php echo $akhir ?></h3>
+        <h3 align="center">List Pasien Poli <?php echo $nama_sesi;?></h3>
+        <h3 align="center">Dokter <?php echo $nama_dokter;?></h3>
+        <h4 align="center"><?php echo format_awal($awal);?> - <?php echo format_akhir($akhir);?></h4>
+        <h4></h4>
         <tr>
                     <th><center>Cek</th>
                     <th><center>No</th>
-                    <th><center>No.RM</th>
-                    <th><center>Nama</th>
-                    <th><center>Alamat</th>
-                    <th><center>Kontak</th>
-                    <th><center>Dokter</th>
-                    <th><center>Booking</th>
-                    <th><center>Sesi</th>
-                    <th><center>Status</th>
+                    <th><center>Nomor RM</th>
+                    <th><center>Nama Pasien</th>
                    </tr>
         <?php 
             include '../koneksi.php';
@@ -45,12 +91,6 @@
                     <td><center><?php echo $no++; ?></td>
                     <td><center><?php echo $d['id_catatan_medik']; ?></td>
                     <td><center><?php echo $d['nama']; ?></td>
-                    <td><center><?php echo $d['alamat']; ?></td>
-                    <td><center><?php echo $d['kontak']; ?></td>
-                    <td><center><?php echo $d['nama_dokter']; ?></td>
-                    <td><center><?php echo $d['booking_tanggal']; ?></td>
-                    <td><center><?php echo $d['nama_sesi']; ?></td>
-                    <td><center><?php echo $d['status']; ?></td>
                   </tr>
         <?php
         }

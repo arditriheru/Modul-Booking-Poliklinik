@@ -1,5 +1,50 @@
 <?php include "readme.php";?>
-<?php include "views/header.php"; ?>
+<?php
+	include "views/header.php";
+	$m = 31;
+	$n = 7;
+	$nextN = mktime(0, 0, 0, date("m"), date("d") + $m, date("Y"));
+	$prevN = mktime(0, 0, 0, date("m"), date("d") - $n, date("Y"));
+	$mak   = date("Y-m-d", $nextN);
+	$min   = date("Y-m-d", $prevN);
+
+	function format_mak($mak)
+                    {
+                        $bulan = array (1 =>   'Januari',
+                                    'Februari',
+                                    'Maret',
+                                    'April',
+                                    'Mei',
+                                    'Juni',
+                                    'Juli',
+                                    'Agustus',
+                                    'September',
+                                    'Oktober',
+                                    'November',
+                                    'Desember'
+                                );
+                        $split = explode('-', $mak);
+                        return $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
+                    }
+                  function format_min($min)
+                    {
+                        $bulan = array (1 =>   'Januari',
+                                    'Februari',
+                                    'Maret',
+                                    'April',
+                                    'Mei',
+                                    'Juni',
+                                    'Juli',
+                                    'Agustus',
+                                    'September',
+                                    'Oktober',
+                                    'November',
+                                    'Desember'
+                                );
+                        $split = explode('-', $min);
+                        return $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
+                    }
+?>
     <nav>
     <div id="wrapper">
       <?php include "menu.php"; ?>   
@@ -8,7 +53,7 @@
       <div id="page-wrapper">
         <div class="row">
           <div class="col-lg-12">
-            <h1>Form <small> Pencarian</small></h1>
+            <h1>Pencarian <small> Reservasi</small></h1>
             <ol class="breadcrumb">
               <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
               <li class="active"><i class="fa fa-search"></i> Cari</li>
@@ -16,7 +61,7 @@
             <?php include "../notifikasi1.php"?>
             <div class="alert alert-warning alert-dismissable">
 			    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			    Pencarian mundur hanya menampilkan data 7 hari dari sekarang!
+			    Pencarian data reservasi minimal tanggal <b><?php echo format_min($min).'</b> dan maksimal tanggal <b>'.format_mak($mak);?></b>
 			</div>
           </div>
         </div><!-- /.row -->

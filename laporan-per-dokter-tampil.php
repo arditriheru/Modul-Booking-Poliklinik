@@ -5,6 +5,44 @@
   $awal       = $_POST['awal'];
   $akhir      = $_POST['akhir'];
   $id_sesi    = $_POST['id_sesi'];
+
+  function awal($awal)
+          {
+            $bulan = array (1 =>   'Januari',
+                  'Februari',
+                  'Maret',
+                  'April',
+                  'Mei',
+                  'Juni',
+                  'Juli',
+                  'Agustus',
+                  'September',
+                  'Oktober',
+                  'November',
+                  'Desember'
+                );
+            $split = explode('-', $awal);
+            return $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
+          }
+
+          function akhir($akhir)
+          {
+            $bulan = array (1 =>   'Januari',
+                  'Februari',
+                  'Maret',
+                  'April',
+                  'Mei',
+                  'Juni',
+                  'Juli',
+                  'Agustus',
+                  'September',
+                  'Oktober',
+                  'November',
+                  'Desember'
+                );
+            $split = explode('-', $akhir);
+            return $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
+          }
 ?>
   <nav>
     <div id="wrapper">
@@ -14,7 +52,7 @@
       <div id="page-wrapper">
         <div class="row">
           <div class="col-lg-12">
-            <h1>Pencarian <small> Data</small></h1>
+            <h1>Pencarian <small> <?php echo awal($awal);?> - <?php echo akhir($akhir);?></small></h1>
             <ol class="breadcrumb">
               <li><a href="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
               <li><a href="laporan-per-dokter"><i class="fa fa-search"></i> Cari</a></li>
@@ -26,6 +64,7 @@
         <div class="row">
           <div class="col-lg-12">
           <div class="table-responsive">
+            <div class="col-lg-8">
             <form method="post" action="laporan-per-dokter-export" role="form">
                   <div class="col-lg-6">
                     <div class="form-group">
@@ -44,6 +83,20 @@
                   <button type="submit" class="btn btn-success">EXPORT</button><br><br>
                   </div>
               </form>
+            </div>
+            <div align="right" class="col-lg-4">
+              <?php 
+                include '../koneksi.php';
+                  $data = mysqli_query($koneksi,
+                    "SELECT COUNT(id_booking) AS total
+                    FROM booking
+                    WHERE booking_tanggal BETWEEN '$awal' AND '$akhir'
+                    AND id_sesi = '$id_sesi'
+                    AND id_dokter='$id_dokter' ORDER BY id_booking ASC;");
+                  while($d = mysqli_fetch_array($data)){
+              ?>
+              <h1><small>Total <?php echo $d['total']; }?> Pasien</small></h1>
+            </div>
             <table class="table table-bordered table-hover table-striped tablesorter">
                 <thead>
                     <tr>

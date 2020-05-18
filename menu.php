@@ -31,6 +31,11 @@
             <li><a href="../dokumentasi-tampil?id_buku=50">
               <i class="fa fa-file"></i> Dokumentasi</a>
             </li>
+             <li>
+              <a href="zona-merah">
+                <button type="submit" class="btn btn-danger">COVID-19</button>
+              </a>
+            </li>
           </ul>
           <ul class="nav navbar-nav navbar-right navbar-user">
             <li class="dropdown user-dropdown">

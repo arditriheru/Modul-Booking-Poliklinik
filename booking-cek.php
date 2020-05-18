@@ -15,8 +15,6 @@
             </ol>  
             <?php include "../notifikasi1.php"?>
           </div>
-        </div><!-- /.row -->
-   <div class="row">
           <div class="col-lg-12">
           <div class="table-responsive">
             <div align="right">

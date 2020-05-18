@@ -1,5 +1,29 @@
 <?php include "readme.php";?>
-<?php include "views/header.php"; ?>
+<?php 
+	include "views/header.php";
+	$m = 31;
+	$nextN = mktime(0, 0, 0, date("m"), date("d") + $m, date("Y"));
+	$mak   = date("Y-m-d", $nextN);
+
+	function format_mak($mak)
+                    {
+                        $bulan = array (1 =>   'Januari',
+                                    'Februari',
+                                    'Maret',
+                                    'April',
+                                    'Mei',
+                                    'Juni',
+                                    'Juli',
+                                    'Agustus',
+                                    'September',
+                                    'Oktober',
+                                    'November',
+                                    'Desember'
+                                );
+                        $split = explode('-', $mak);
+                        return $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
+                    }
+?>
     <nav>
     <div id="wrapper">
       <?php include "menu.php"; ?>   
@@ -16,10 +40,17 @@
             <?php include "../notifikasi1.php"?>
             <div class="alert alert-warning alert-dismissable">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                Pasien hanya dapat mendaftar sekali dalam periode <b>30 hari</b> pada dokter, jadwal dan sesi yang sama
+                Reservasi maksimal sampai tanggal <b><?php echo format_mak($mak);?></b>
             </div>
           </div>
         </div><!-- /.row -->
+        <div class="row">
+        <div class="col-lg-12">
+              <a href="covid-skrining">
+                <button type="submit" class="btn btn-primary">Skrining</button>
+              </a>
+            </div>
+        </div><br>
         <div class="row">
           <div class="table-responsive">
             <form method="post" action="booking-tambah-cari-rm" role="form">

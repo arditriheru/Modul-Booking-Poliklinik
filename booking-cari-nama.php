@@ -8,7 +8,7 @@
       <div id="page-wrapper">
         <div class="row">
           <div class="col-lg-12">
-            <h1>Form <small>Tambah</small></h1>
+            <h1>Hasil <small>Pencarian</small></h1>
             <ol class="breadcrumb">
               <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
               <li><a href="booking-tambah"><i class="fa fa-pencil"></i> Tambah</a></li>
