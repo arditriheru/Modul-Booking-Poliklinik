@@ -25,6 +25,7 @@
                 <li><a href="booking-tambah">Tambah</a></li>
               </ul>
             </li>
+            <li><a href="covid-skrining"><i class="fa fa-thumb-tack"></i> Skrining</a></li>
             <li><a href="dokter-tambah"><i class="fa fa-user-md"></i> Dokter</a></li>
             <li><a href="jadwal-dokter"><i class="fa fa-calendar"></i> Jadwal</a></li>
             <li><a href="laporan-per-dokter"><i class="fa fa-search"></i> Pencarian</a></li>

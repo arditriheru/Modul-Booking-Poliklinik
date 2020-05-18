@@ -12,7 +12,7 @@
             <ol class="breadcrumb">
               <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
               <li><a href="booking-tambah"><i class="fa fa-plus"></i> Tambah</a></li>
-              <li class="active"><i class="fa fa-list"></i> Skrining</li>
+              <li class="active"><i class="fa fa-thumb-tack"></i> Skrining</li>
             </ol>
             <?php include "../notifikasi1.php"?>
           </div>
@@ -85,7 +85,7 @@
               <h5 class="bluetext"><b>A. Gejala</b></h5>
               <ol>
               <div class="form-group">
-                <label><li></li></label> Apakah pasien (termasuk 1 pendamping) merasa demam >38&deg;C / riwayat demam <14 hari?
+                <label><li></li></label> Apakah pasien (termasuk pendamping) merasa demam >38&deg;C / riwayat demam <14 hari?
                 <select class="form-control" type="text" name="a1">
                   <option disabled selected>Pilih</option>
                   <option value='1'>Ya</option>
@@ -93,7 +93,7 @@
                 </select>
               </div>
               <div class="form-group">
-                <label><li></li></label> Apakah pasien (pendamping) merasa batuk / pilek / sakit tenggorokan / sesak nafas <14 hari?
+                <label><li></li></label> Apakah pasien (termasuk pendamping) merasa batuk / pilek / sakit tenggorokan / sesak nafas <14 hari?
                 <select class="form-control" type="text" name="a2">
                   <option disabled selected>Pilih</option>
                   <option value='1'>Ya</option>
@@ -101,7 +101,7 @@
                 </select>
               </div>
               <div class="form-group">
-                <label><li></li></label> Apakah pasien (pendamping) merasakan nafas cepat / terasa berat <14 hari?<br>
+                <label><li></li></label> Apakah pasien (termasuk pendamping) merasakan nafas cepat / terasa berat <14 hari?<br>
                 <select class="form-control" type="text" name="a3">
                   <option disabled selected>Pilih</option>
                   <option value='1'>Ya</option>
@@ -123,7 +123,7 @@
               <h5 class="bluetext"><b>C. Faktor Risiko</b></h5>
               <ol>
               <div class="form-group">
-                <label><li></li></label> Apakah pasien (pendamping) memiliki riwayat perjalanan / tinggal di luar negeri dalam waktu 14 hari sebelum timbul gejala?
+                <label><li></li></label> Apakah pasien (termasuk pendamping) memiliki riwayat perjalanan / tinggal di luar negeri dalam waktu 14 hari sebelum timbul gejala?
                 <select class="form-control" type="text" name="c1">
                   <option disabled selected>Pilih</option>
                   <option value='1'>Ya</option>
@@ -131,7 +131,7 @@
                 </select>
               </div>
                <div class="form-group">
-                <label><li></li></label> Apakah pasien (pendamping) memiliki riwayat bepergian dari area transmisi lokal di Indonesia / dari luar kota Yogyakarta / Indogrosir Yogyakarta, dalam waktu 14 hari sebelum timbul gejala?
+                <label><li></li></label> Apakah pasien (termasuk pendamping) memiliki riwayat bepergian dari area transmisi lokal di Indonesia / dari luar kota Yogyakarta / Indogrosir Yogyakarta, dalam waktu 14 hari sebelum timbul gejala?
                 <select class="form-control" type="text" name="c2">
                   <option disabled selected>Pilih</option>
                   <option value='1'>Ya</option>
@@ -139,7 +139,7 @@
                 </select>
               </div>
               <div class="form-group">
-                <label><li></li></label> Apakah pasien (pendamping) memiliki riwayat kontak erat dengan pasien yang diduga maupun yang positif COVID-19?<br>
+                <label><li></li></label> Apakah pasien (termasuk pendamping) memiliki riwayat kontak erat dengan pasien yang diduga maupun yang positif COVID-19?<br>
                 <select class="form-control" type="text" name="c3">
                   <option disabled selected>Pilih</option>
                   <option value='1'>Ya</option>
