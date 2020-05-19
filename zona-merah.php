@@ -14,9 +14,13 @@
           <li class="active"><i class="fa fa-exclamation-triangle"></i> Peringatan</li>
         </ol>  
         <?php include "../notifikasi1.php"?>
+        <div class="alert alert-warning alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          Untuk memperbarui daftar zona merah COVID-19 : <b>Copy jpg terbaru - explorer - network - RACHMI-SVR - folder redzone - paste - rename jpg menjadi redzone - kembali ke simetris - CTRL+F5</b>
+        </div>
       </div>
       <div class="col-lg-12">
-        <img class="img-responsive" src="../images/blacklist.jpg" width="100%" alt="Gambar Bootstrap 3">
+        <img class="img-responsive" src="../redzone/redzone.jpg" width="100%" alt="Gambar Bootstrap 3">
       </div>
     </div><!-- /.row --><br><br><?php include "../copyright.php";?>
   </div><!-- /#page-wrapper -->
