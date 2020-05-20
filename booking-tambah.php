@@ -40,7 +40,7 @@
             <?php include "../notifikasi1.php"?>
             <div class="alert alert-warning alert-dismissable">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                Reservasi maksimal sampai tanggal <b><?php echo format_mak($mak);?></b>
+                <font size='3'>Reservasi maksimal sampai tanggal <b><?php echo format_mak($mak);?></font></b>
             </div>
           </div>
         </div><!-- /.row -->

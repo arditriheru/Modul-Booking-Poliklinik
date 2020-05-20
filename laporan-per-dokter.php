@@ -53,7 +53,7 @@
       <div id="page-wrapper">
         <div class="row">
           <div class="col-lg-12">
-            <h1>Pencarian <small> Reservasi</small></h1>
+            <h1>Pencarian <small> Registrasi</small></h1>
             <ol class="breadcrumb">
               <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
               <li class="active"><i class="fa fa-search"></i> Cari</li>
@@ -61,7 +61,7 @@
             <?php include "../notifikasi1.php"?>
             <div class="alert alert-warning alert-dismissable">
 			    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			    Pencarian data reservasi minimal tanggal <b><?php echo format_min($min).'</b> dan maksimal tanggal <b>'.format_mak($mak);?></b>
+			    <font size='3'>Pencarian data registrasi minimal tanggal <b><?php echo format_min($min).'</b> dan maksimal tanggal <b>'.format_mak($mak);?></font></b>
 			</div>
           </div>
         </div><!-- /.row -->

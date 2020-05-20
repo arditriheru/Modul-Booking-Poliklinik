@@ -9,7 +9,7 @@
       <div id="page-wrapper">
         <div class="row">
           <div class="col-lg-12">
-            <h1>Edit <small>Reservasi</small></h1>
+            <h1>Edit <small>Registrasi</small></h1>
             <ol class="breadcrumb">
               <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
               <li><a href="booking-detail?id_booking=<?php echo $id_booking?>"><i class="fa fa-eye"></i> Detail</a></li>
@@ -18,7 +18,7 @@
             <?php include "../notifikasi1.php"?>
             <div class="alert alert-danger alert-dismissable">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                Jika pasien melakukan perubahan jadwal booking, hapus jadwal sebelumnya dan tambahkan jadwal baru!
+                <font size='3'>Jika pasien melakukan perubahan jadwal, hapus jadwal sebelumnya dan tambahkan jadwal baru!</font>
             </div>
           </div>
         </div><!-- /.row -->
@@ -82,7 +82,7 @@
           <div class="col-lg-6">
             <form method="post" action="" role="form">
               <div class="form-group">
-                <label>No. RM</label>
+                <label>Nomor RM</label>
                 <input class="form-control" type="text" name="id_catatan_medik"
                 value="<?php echo $d['id_catatan_medik']; ?>" readonly>
               </div>
