@@ -87,7 +87,7 @@
                 value="<?php echo $d['id_catatan_medik']; ?>" readonly>
               </div>
               <div class="form-group">
-                <label>Nama</label>
+                <label>Nama Pasien</label>
                 <input class="form-control" type="text" name="nama"
                 value="<?php echo $d['nama']; ?>" required="">
               </div>

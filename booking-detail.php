@@ -93,43 +93,43 @@
               ?>
               <tbody>
               <tr>
-                  <td>Nomor RM</td>
+                  <td><b>Nomor RM</b></td>
                   <td><?php echo $d['id_catatan_medik']; ?></td>
               </tr>
               <tr>
-                  <td>Nama</td>
+                  <td><b>Nama Pasien</b></td>
                   <td><?php echo $d['nama']; ?></td>
               </tr>
               <tr>
-                  <td>Alamat</td>
+                  <td><b>Alamat</b></td>
                   <td><?php echo $d['alamat']; ?></td>
               </tr>
               <tr>
-                  <td>Kontak</td>
+                  <td><b>Kontak</b></td>
                   <td><?php echo $d['kontak']; ?></td>
               </tr>
               <tr>
-                  <td>Dokter</td>
+                  <td><b>Dokter</b></td>
                   <td><?php echo $d['nama_dokter']; ?></td>
               </tr>
               <tr>
-                  <td>Jadwal</td>
+                  <td><b>Jadwal</b></td>
                   <td><?php echo format_jadwal($booking_tanggal); ?></td>
               </tr>
               <tr>
-                  <td>Sesi</td>
+                  <td><b>Sesi</b></td>
                   <td><?php echo $d['nama_sesi']; ?></td>
               </tr>
               <tr>
-                  <td>Reservasi</td>
+                  <td><b>Registrasi</b></td>
                   <td><?php echo format_reservasi($tanggal); ?> / <?php echo $d['jam']; ?></td>
               </tr>
               <tr>
-                  <td>Status</td>
+                  <td><b>Status</b></td>
                   <td><?php echo $d['status']; ?></td>
               </tr>
               <tr>
-                  <td>Keterangan</td>
+                  <td><b>Keterangan</b></td>
                   <td><?php echo $d['keterangan']; ?></td>
               </tr>
               <?php 
