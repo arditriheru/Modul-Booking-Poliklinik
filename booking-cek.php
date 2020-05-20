@@ -8,7 +8,7 @@
       <div id="page-wrapper">
         <div class="row">
           <div class="col-lg-12">
-            <h1>Reservasi <small><?php include 'tanggal-sekarang.php';?></small></h1>
+            <h1>Registrasi <small><?php include 'tanggal-sekarang.php';?></small></h1>
             <ol class="breadcrumb">
               <li><a href="dashboard"><i class="fa fa-dashboard"></i> Dashboard</li></a>
               <li class="active"><i class="fa fa-check-square-o"></i> Hari Ini</li>
