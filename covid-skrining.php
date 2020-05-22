@@ -66,7 +66,19 @@
                         });
                     }, 10);
                 </script>";
-                }else{
+          }elseif($C1==1 && $C2==1 && $C3==1){
+                echo "<script>
+                    setTimeout(function() {
+                        swal({
+                            title: 'O.T.G',
+                            text: 'Curiga Orang Tanpa Gejala',
+                            type: 'warning'
+                        }, function() {
+                            window.location = 'booking-tambah';
+                        });
+                    }, 10);
+                </script>";
+              }else{
                 echo "<script>
                     setTimeout(function() {
                         swal({
