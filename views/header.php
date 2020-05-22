@@ -40,6 +40,9 @@
     .bluetext {
     color: #008cba;
     }
+    .redtext {
+    color: #e71414;
+    }
     .navbar-rachmi{
         background-color:#e67e22;
         border-color:#d35400
