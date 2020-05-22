@@ -174,7 +174,7 @@
           <div class="col-lg-4">
             <p class="redtext"><b>Tindak Lanjut Curiga ODP :</b></p>
             <ol>
-              <li>Beri masker medis pada ODP;</li>
+              <li>Beri masker pada ODP (jika tidak memakai masker);</li>
               <li>Edukasi isolasi di rumah selama 14 hari;</li>
               <li>Edukasi kepada pasien dan keluarga tentang PHBS;</li>
             </ol>
@@ -182,7 +182,7 @@
           <div class="col-lg-4">
             <p class="redtext"><b>Tindak Lanjut Curiga OTG :</b></p>
             <ol>
-              <li>Beri masker medis pada OTG;</li>
+              <li>Beri masker pada OTG (jika tidak memakai masker);</li>
               <li>Edukasi isolasi di rumah selama 14 hari;</li>
               <li>Edukasi kepada pasien dan keluarga tentang PHBS;</li>
             </ol>
