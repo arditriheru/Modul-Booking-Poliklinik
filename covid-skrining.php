@@ -51,10 +51,10 @@
                         });
                     }, 10);
                 </script>";
-           }elseif($A1==1 && $B1==1 && $C1==1 ||
-                   $A2==1 && $B1==1 && $C1==1 ||
-                   $A1==1 && $B1==1 && $C2==1 ||
-                   $A2==1 && $B1==1 && $C2==1){
+          }elseif($A1==1 && $B1==1 && $C1==1 ||
+                  $A2==1 && $B1==1 && $C1==1 ||
+                  $A1==1 && $B1==1 && $C2==1 ||
+                  $A2==1 && $B1==1 && $C2==1){
                 echo "<script>
                     setTimeout(function() {
                         swal({
@@ -151,7 +151,28 @@
             </ol>
             </form>
           </div>
-        </div><!-- /.row -->
-      </div><br><br><?php include "../copyright.php";?><br><br><!-- /#page-wrapper -->
+        </div><br>
+        <div class="row">
+        <div class="col-lg-6">
+            <p class="redtext"><b>Tindak Lanjut Curiga PDP :</b></p>
+            <ol>
+              <li>Siapkan rujukan ke RS rujukan, komunikasi risiko, identifikasi dan pemantauan kontak erat;</li>
+              <li>Mengisi form pelaporan ke Dinkes;</li>
+            </ol>
+          </div>
+          <div class="col-lg-6">
+            <p class="redtext"><b>Tindak Lanjut Curiga ODP :</b></p>
+            <ol>
+              <li>Beri masker bedah pada ODP;</li>
+              <li>Terapi sesuai dengan keluhan;</li>
+              <li>Rontgen Thorax dan darah lengkap;</li>
+              <li>Edukasi isolasi di rumah selama 14 hari;</li>
+              <li>Edukasi kepada pasien dan keluarga tentang PHBS;</li>
+              <li>Lapor ke Dinkes untuk pemantauan kondisi setiap hari;</li>
+            </ol>
+          </div>
+        </div><br><br>
+      </div><!-- /.row -->
+      <?php include "../copyright.php";?><br><br><!-- /#page-wrapper -->
     </div><!-- /#wrapper -->
   <?php include "views/footer.php"; ?> 
