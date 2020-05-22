@@ -165,22 +165,26 @@
           </div>
         </div><br>
         <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-4">
             <p class="redtext"><b>Tindak Lanjut Curiga PDP :</b></p>
             <ol>
               <li>Siapkan rujukan ke RS rujukan, komunikasi risiko, identifikasi dan pemantauan kontak erat;</li>
-              <li>Mengisi form pelaporan ke Dinkes;</li>
             </ol>
           </div>
-          <div class="col-lg-6">
+          <div class="col-lg-4">
             <p class="redtext"><b>Tindak Lanjut Curiga ODP :</b></p>
             <ol>
-              <li>Beri masker bedah pada ODP;</li>
-              <li>Terapi sesuai dengan keluhan;</li>
-              <li>Rontgen Thorax dan darah lengkap;</li>
+              <li>Beri masker medis pada ODP;</li>
               <li>Edukasi isolasi di rumah selama 14 hari;</li>
               <li>Edukasi kepada pasien dan keluarga tentang PHBS;</li>
-              <li>Lapor ke Dinkes untuk pemantauan kondisi setiap hari;</li>
+            </ol>
+          </div>
+          <div class="col-lg-4">
+            <p class="redtext"><b>Tindak Lanjut Curiga OTG :</b></p>
+            <ol>
+              <li>Beri masker medis pada OTG;</li>
+              <li>Edukasi isolasi di rumah selama 14 hari;</li>
+              <li>Edukasi kepada pasien dan keluarga tentang PHBS;</li>
             </ol>
           </div>
         </div><br><br>
