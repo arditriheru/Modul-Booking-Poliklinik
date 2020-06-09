@@ -15,8 +15,11 @@
             <?php include "../notifikasi1.php"?>
           </div>
         </div><!-- /.row -->
-   <?php include "booking-tampil.php"; ?>
-   <?php include "auto-delete.php"; ?>
+  <?php include "booking-tampil.php"; ?>
+  <?php
+    include "booking-auto-delete.php";
+    include "tumbang-auto-delete.php";
+  ?>
 <br><br><?php include "../copyright.php";?>
       </div><!-- /#page-wrapper -->
     </div><!-- /#wrapper -->
