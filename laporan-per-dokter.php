@@ -74,6 +74,7 @@
             <div class="table-responsive">
             <form method="post" action="laporan-per-dokter-tampil" role="form">
             <div class="col-lg-6">
+              <h3 align="center">Poliklinik</h3><br>
               <div class="form-group">
                 <label>Nama Dokter</label>
                 <select class="form-control" type="text" name="id_dokter">
@@ -142,6 +143,7 @@
             <div class="table-responsive">
             <form method="post" action="laporan-per-petugas-tampil" role="form">
             <div class="col-lg-6">
+              <h3 align="center">Tumbuh Kembang</h3><br>
               <div class="form-group">
                 <label>Nama Petugas</label>
                 <select class="form-control" type="text" name="id_petugas">

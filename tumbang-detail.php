@@ -108,7 +108,7 @@
                   <td><?php echo $d['kontak']; ?></td>
               </tr>
               <tr>
-                  <td><b>Dokter</b></td>
+                  <td><b>Petugas</b></td>
                   <td><?php echo $d['nama_petugas']; ?></td>
               </tr>
               <tr>
