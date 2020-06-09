@@ -47,7 +47,7 @@
         <div class="row">
         <div class="col-lg-12">
               <a href="covid-skrining">
-                <button type="submit" class="btn btn-primary">Skrining</button>
+                <button type="submit" class="btn btn-warning">Skrining</button>
               </a>
             </div>
         </div><br>
@@ -71,10 +71,9 @@
             </form>
            </div>
         </div><br><br><!-- /.row -->
-        <div class="col-lg-12">
         <div class="table-responsive">
-          <ul class="nav nav-tabs" style="margin-bottom: 15px;">
-            <li><a href="#1" data-toggle="tab">Poliklinik</a></li>
+          <ul class="nav nav-pills" style="margin-bottom: 15px;">
+            <li class="active"><a href="#1" data-toggle="tab">Poliklinik</a></li>
             <li><a href="#2" data-toggle="tab">Tumbuh Kembang</a></li>
           </ul>
           <div id="myTabContent" class="tab-content">
@@ -240,7 +239,6 @@
             </div>
             </div>
           </div>
-        </div>
         </div>
       <br><br><?php include "../copyright.php";?><br><br><!-- /#page-wrapper -->
     </div><!-- /#wrapper -->

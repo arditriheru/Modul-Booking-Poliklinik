@@ -1,6 +1,6 @@
         <h3 align="center">Tumbuh Kembang</h3><br>
           <div class="col-lg-8">
-            <form method="post" action="laporan-booking-hari-ini-export" role="form">
+            <form method="post" action="laporan-tumbang-hari-ini-export" role="form">
               <button type="submit" class="btn btn-success">EXPORT</button>
               <div class="btn-group">
                   <button type="button" class="btn btn-primary">Per Petugas</button>
@@ -72,10 +72,10 @@
                     <td><center><?php echo $d['keterangan']; ?></td>
                     <td>
                       <div align="center">
-                        <a href="booking-datang-proses?id_booking=<?php echo $d['id_booking']; ?>"
+                        <a href="tumbang-datang-proses?id_tumbang=<?php echo $d['id_tumbang']; ?>"
                            onclick="javascript: return confirm('Sudah Datang?')"
                         <button type="button" class="btn btn-success">Datang</a><br><br>
-                        <a href="booking-detail?id_booking=<?php echo $d['id_booking']; ?>"
+                        <a href="tumbang-detail?id_tumbang=<?php echo $d['id_tumbang']; ?>"
                         <button type="button" class="btn btn-warning">Detail</a><br><br>
                       </div>
                     </td>

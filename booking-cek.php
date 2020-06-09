@@ -16,8 +16,17 @@
             <?php include "../notifikasi1.php"?>
           </div>
           <div class="col-lg-12">
-          <div class="table-responsive">
-            <div align="right">
+        <div class="table-responsive">
+          <ul class="nav nav-pills" style="margin-bottom: 15px;">
+            <li class="active"><a href="#1" data-toggle="tab">Poliklinik</a></li>
+            <li><a href="#2" data-toggle="tab">Tumbuh Kembang</a></li>
+          </ul>
+          <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="1">
+            <div class="row">
+            <div class="col-lg-12">
+            <div class="table-responsive">
+                <div align="right">
               <?php 
                   date_default_timezone_set("Asia/Jakarta");
                   $tanggalHariIni=date('Y-m-d');
@@ -79,9 +88,83 @@
                     ?>
                     </tbody>
                   </table>
-                </div>
+            </div>
+            </div>
+            </div>
+            </div>
+
+            <div class="tab-pane fade in" id="2">
+            <div class="row">
+            <div class="col-lg-12">
+            <div class="table-responsive">
+                <div align="right">
+              <?php 
+                  date_default_timezone_set("Asia/Jakarta");
+                  $tanggalHariIni=date('Y-m-d');
+                    include '../koneksi.php';
+                    $data = mysqli_query($koneksi,
+                      "SELECT COUNT(id_tumbang) AS total
+                      FROM tumbang
+                      WHERE tumbang.tanggal='$tanggalHariIni';");
+                    while($d = mysqli_fetch_array($data)){
+              ?>
+              <h1><small>Total <?php echo $d['total']; }?> Pasien</small></h1>
+            </div>
+            <table class="table table-bordered table-hover table-striped tablesorter">
+                <thead>
+                    <tr>
+                    <th><center>No. RM</th>
+                    <th><center>Nama Pasien</th>
+                    <th><center>Kontak</th>
+                    <th><center>Petugas</th>
+                    <th><center>Jadwal</th>
+                    <th><center>Sesi</th>
+                    <th><center>Keterangan</th>
+                    <th><center>Action</th>
+                   </tr>
+                </thead>
+                <tbody>
+                  <?php 
+                    include '../koneksi.php';
+                    date_default_timezone_set("Asia/Jakarta");
+                    $tanggalsekarang=date('Y-m-d');
+                    $no = 1;
+                    $data = mysqli_query($koneksi,
+                      "SELECT *, tumbang_petugas.nama_petugas
+                      FROM tumbang, tumbang_petugas
+                      WHERE tumbang.id_petugas=tumbang_petugas.id_petugas
+                      AND tumbang.tanggal = '$tanggalsekarang'
+                      ORDER BY tumbang.id_tumbang DESC;");
+                    while($d = mysqli_fetch_array($data)){
+                      $jadwal = $d['jadwal'];
+                  ?>
+                  <tr>
+                    <td><center><?php echo $d['id_catatan_medik']; ?></td>
+                    <td><center><?php echo $d['nama']; ?></td>
+                    <td><center><?php echo $d['kontak']; ?></td>
+                    <td><center><?php echo $d['nama_petugas']; ?></td>
+                    <td><center><?php echo date("d/m/Y", strtotime($jadwal)); ?></td>
+                    <td><center><?php echo $d['sesi']; ?></td>
+                    <td><center><?php echo $d['keterangan']; ?></td>
+                    <td>
+                      <div align="center">
+                        <a href="tumbang-detail?id_tumbang=<?php echo $d['id_tumbang']; ?>"
+                        <button type="button" class="btn btn-warning">Detail</a><br><br>
+                      </div>
+                    </td>
+                  </tr>
+                  <?php 
+                    }
+                    ?>
+                    </tbody>
+                  </table>
+            </div>
+            </div>
+            </div>
+            </div>
           </div>
-        </div><!-- /.row -->
+        </div>
+        </div>
 <br><br><?php include "../copyright.php";?>
       </div><!-- /#page-wrapper -->
     </div><!-- /#wrapper -->

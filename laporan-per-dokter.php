@@ -62,16 +62,20 @@
             <div class="alert alert-warning alert-dismissable">
 			    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 			    <font size='3'>Pencarian data registrasi minimal tanggal <b><?php echo format_min($min).'</b> dan maksimal tanggal <b>'.format_mak($mak);?></font></b>
-			</div>
-          </div>
-        </div><!-- /.row -->
-        <div class="row">
-          <div class="col-lg-12">
-          <div class="table-responsive">
+			   </div>
+        <div class="table-responsive">
+          <ul class="nav nav-pills" style="margin-bottom: 15px;">
+            <li class="active"><a href="#1" data-toggle="tab">Poliklinik</a></li>
+            <li><a href="#2" data-toggle="tab">Tumbuh Kembang</a></li>
+          </ul>
+          <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="1">
+            <div class="row">
+            <div class="table-responsive">
             <form method="post" action="laporan-per-dokter-tampil" role="form">
             <div class="col-lg-6">
-            	<div class="form-group">
-                <label>Dokter</label>
+              <div class="form-group">
+                <label>Nama Dokter</label>
                 <select class="form-control" type="text" name="id_dokter">
                 <p style="color:red;"><?php echo ($error['id_dokter']) ? $error['id_dokter'] : ''; ?></p>
                   <option disabled selected>Pilih</option>
@@ -129,8 +133,69 @@
             </div>
             </form>
           </div>
+            </div>
+            </div>
+            </div>
+
+            <div class="tab-pane fade in" id="2">
+            <div class="row">
+            <div class="table-responsive">
+            <form method="post" action="laporan-per-petugas-tampil" role="form">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label>Nama Petugas</label>
+                <select class="form-control" type="text" name="id_petugas">
+                <p style="color:red;"><?php echo ($error['id_petugas']) ? $error['id_petugas'] : ''; ?></p>
+                  <option disabled selected>Pilih</option>
+                  <?php 
+                    include '../koneksi.php';
+                    $data = mysqli_query($koneksi,
+                      "SELECT * FROM tumbang_petugas WHERE status=1;");
+                    while($d = mysqli_fetch_array($data)){
+                    echo "<option value='".$d['id_petugas']."'>".$d['nama_petugas']."</option>";
+                    }
+                  ?>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Dari Tanggal</label>
+                <input class="form-control" type="date" name="awal">
+              </div>
+              <div class="form-group">
+                <label>Sampai Tanggal</label>
+                <input class="form-control" type="date" name="akhir">
+              </div>
+              <div class="form-group">
+                <label>Sesi</label>
+                <input class="form-control" type="text" name="sesi">
+                <p style="color:red;"><?php echo ($error['sesi']) ? $error['sesi'] : ''; ?></p>
+              </div>
+              <button type="submit" class="btn btn-success">Cari</button>
+            </div>
+            </form>
+            <div class="col-lg-6">
+            <form method="post" action="tumbang-cari-rm" role="form">
+            <div class="col-lg-12">
+              <div class="form-group">
+                <label>Nomor RM</label>
+                <input class="form-control" type="text" name="id_catatan_medik" placeholder="Nomor Rekam Medik">
+              </div><button type="submit" class="btn btn-success">Cari</button>
+            </div>
+          </form><br>
+          <form method="post" action="tumbang-cari-nama" role="form">
+          <div class="col-lg-12">
+              <div class="form-group">
+                <label>Nama Pasien</label>
+                <input class="form-control" type="text" name="nama" placeholder="Nama Pasien"">
+              </div><button type="submit" class="btn btn-success">Cari</button>
+            </div>
+            </form>
           </div>
-        </div><!-- /.row -->
-      </div><br><br><?php include "../copyright.php";?><br><br><!-- /#page-wrapper -->
+            </div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <br><br><?php include "../copyright.php";?><br><br><!-- /#page-wrapper -->
     </div><!-- /#wrapper -->
     <?php include "views/footer.php"; ?>

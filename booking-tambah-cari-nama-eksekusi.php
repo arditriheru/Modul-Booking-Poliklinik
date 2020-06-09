@@ -17,8 +17,8 @@
             </div>
                     <div class="col-lg-12">
         <div class="table-responsive">
-          <ul class="nav nav-tabs" style="margin-bottom: 15px;">
-            <li><a href="#1" data-toggle="tab">Poliklinik</a></li>
+          <ul class="nav nav-pills" style="margin-bottom: 15px;">
+            <li class="active"><a href="#1" data-toggle="tab">Poliklinik</a></li>
             <li><a href="#2" data-toggle="tab">Tumbuh Kembang</a></li>
           </ul>
           <div id="myTabContent" class="tab-content">

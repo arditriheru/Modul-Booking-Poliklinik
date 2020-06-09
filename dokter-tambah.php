@@ -15,10 +15,20 @@
             </ol>
             <?php include "../notifikasi1.php"?>
           </div>
-        </div><!-- /.row -->
-        <div class="row">
-          <div class="col-lg-6">
-            <?php
+                  <div class="col-lg-12">
+        <div class="table-responsive">
+          <ul class="nav nav-pills" style="margin-bottom: 15px;">
+            <li class="active"><a href="#1" data-toggle="tab">Poliklinik</a></li>
+            <li><a href="#2" data-toggle="tab">Tumbuh Kembang</a></li>
+          </ul>
+          <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="1">
+            <div class="row">
+            <div class="col-lg-12">
+            <div class="table-responsive">
+                <div class="col-lg-6">
+                  <h3 align="center">Poliklinik</h3>
+                    <?php
               if(isset($_POST['tambah'])){
                 include '../koneksi.php';
                 // menangkap data yang di kirim dari form
@@ -82,10 +92,9 @@
               <button type="submit" name="tambah" class="btn btn-success">Tambah</button>
               <button type="reset" class="btn btn-warning">Reset</button>  
             </form>
-          </div>
-          <div class="col-lg-6">
-          <div class="table-responsive">
-            <table class="table table-bordered table-hover table-striped tablesorter">
+                </div>
+                <div class="col-lg-6">
+                    <table class="table table-bordered table-hover table-striped tablesorter">
                 <thead>
                     <tr>
                     <th><center>No</th>
@@ -132,8 +141,25 @@
                     </tbody>
                   </table>
                 </div>
+            </div>
+            </div>
+            </div>
+            </div>
+
+            <div class="tab-pane fade in" id="2">
+            <div class="row">
+            <div class="col-lg-12">
+            <div class="table-responsive">
+                <div class="col-lg-6">
+                    <?php include "petugas-tambah.php";?>
+                </div>
+            </div>
+            </div>
+            </div>
+            </div>
           </div>
-        </div><!-- /.row -->
+        </div>
+        </div>
       </div><br><br><?php include "../copyright.php";?><br><br><!-- /#page-wrapper -->
     </div><!-- /#wrapper -->
   <?php include "views/footer.php"; ?> 
