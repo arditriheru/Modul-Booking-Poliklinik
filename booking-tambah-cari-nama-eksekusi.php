@@ -14,10 +14,19 @@
               <li class="active"><i class="fa fa-edit"></i> Form</a></li>
             </ol>
             <?php include "../notifikasi1.php"?>
-          </div>
-        </div><!-- /.row -->
-        <div class="row">
-          <div class="col-lg-6">
+            </div>
+                    <div class="col-lg-12">
+        <div class="table-responsive">
+          <ul class="nav nav-tabs" style="margin-bottom: 15px;">
+            <li><a href="#1" data-toggle="tab">Poliklinik</a></li>
+            <li><a href="#2" data-toggle="tab">Tumbuh Kembang</a></li>
+          </ul>
+          <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="1">
+            <div class="row">
+            <div class="col-lg-6">
+            <div class="table-responsive">
+                <h3 align="center">Poliklinik</h3>
             <?php 
                 include '../koneksi.php';
                 $id_register = $_GET['id_register'];
@@ -45,10 +54,10 @@
                 $keterangan       = $_POST['keterangan'];
                 // cek selisih hari
                 $tglsekarang  = new DateTime();
-				$jadwal 	  = new DateTime("$booking_tanggal");
-				$hasil 		  = $tglsekarang->diff($jadwal)->format("%a");
-				$selisih 	  = $hasil;
-				// cek antrian
+                $jadwal     = new DateTime("$booking_tanggal");
+                $hasil      = $tglsekarang->diff($jadwal)->format("%a");
+                $selisih    = $hasil;
+                // cek antrian
                 $a = mysqli_query($koneksi,
                   "SELECT COUNT(*) AS antrian
                   FROM booking
@@ -76,7 +85,7 @@
                   $error['id_sesi']='Sesi Harus Diisi!!!';
                 }if($selisih>30){
                 echo "<script>alert('GAGAL!!! Lebih dari 30 Hari!');document.location='booking-tambah'</script>";
-                	break;
+                  break;
                 }if(empty($error)){
                   $c = mysqli_query($koneksi,
                   "SELECT COUNT(*) AS cek
@@ -103,7 +112,7 @@
                             text: 'Berhasil Mendaftarkan',
                             type: 'success'
                         }, function() {
-                            window.location = 'booking-cek';
+                            window.location = 'booking-tambah';
                         });
                     }, 10);
                 </script>";
@@ -126,7 +135,7 @@
           ?>
             <form method="post" action="" role="form">
               <div class="form-group">
-                <label>No. RM</label>
+                <label>Nomor Rekam Medik</label>
                 <input class="form-control" type="text" name="id_catatan_medik"
                 value="<?php echo $d['id_catatan_medik']; ?>" readonly>
                 <p style="color:red;"><?php echo ($error['id_catatan_medik']) ? $error['id_catatan_medik'] : ''; ?></p>
@@ -193,10 +202,26 @@
               </div>
               <button type="submit" name="submit" class="btn btn-success">Tambah</button>
               <button type="reset" class="btn btn-warning">Reset</button>  
-            </form>
+            </form><?php } ?>
+            </div>
+            </div>
+            </div>
+            </div>
+
+            <div class="tab-pane fade in" id="2">
+            <div class="row">
+            <div class="col-lg-6">
+            <div class="table-responsive">
+                <?php include "tumbang-tambah-cari-nama-eksekusi.php";?>
+            </div>
+            </div>
+            </div>
+            </div>
           </div>
-      <?php } ?>
+        </div>
+        </div>
+          </div>
         </div><!-- /.row -->
-      </div><br><br><?php include "../copyright.php";?><br><br><!-- /#page-wrapper -->
+      <br><br><?php include "../copyright.php";?><br><br><!-- /#page-wrapper -->
     </div><!-- /#wrapper -->
     <?php include "views/footer.php"; ?>

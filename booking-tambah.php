@@ -71,10 +71,20 @@
             </form>
            </div>
         </div><br><br><!-- /.row -->
-        <div class="row">
-          <div class="col-lg-6">
+        <div class="col-lg-12">
+        <div class="table-responsive">
+          <ul class="nav nav-tabs" style="margin-bottom: 15px;">
+            <li><a href="#1" data-toggle="tab">Poliklinik</a></li>
+            <li><a href="#2" data-toggle="tab">Tumbuh Kembang</a></li>
+          </ul>
+          <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="1">
+            <div class="row">
+            <div class="col-lg-6">
+            <div class="table-responsive">
+                <h3 align="center">Poliklinik</h3>
             <?php
-              if(isset($_POST['submit'])){
+              if(isset($_POST['polisubmit'])){
                 include '../koneksi.php';
                 date_default_timezone_set("Asia/Jakarta");
                 $tanggal=date('Y-m-d');
@@ -93,10 +103,10 @@
                 $keterangan       = $_POST['keterangan'];
                 // cek selisih hari
                 $tglsekarang  = new DateTime();
-				$jadwal 	  = new DateTime("$booking_tanggal");
-				$hasil 		  = $tglsekarang->diff($jadwal)->format("%a");
-				$selisih 	  = $hasil;
-				// cek antrian
+                $jadwal     = new DateTime("$booking_tanggal");
+                $hasil      = $tglsekarang->diff($jadwal)->format("%a");
+                $selisih    = $hasil;
+                // cek antrian
                 $a = mysqli_query($koneksi,
                   "SELECT COUNT(*) AS antrian
                   FROM booking
@@ -122,7 +132,7 @@
                   $error['id_sesi']='Sesi Harus Diisi!!!';
                 }if($selisih>30){
                 echo "<script>alert('GAGAL!!! Lebih dari 30 Hari!');document.location='booking-tambah'</script>";
-                	break;
+                  break;
                 }if(empty($error)){
                   $simpan=mysqli_query($koneksi,"INSERT INTO booking (id_booking, nama, alamat, kontak, id_catatan_medik, booking_tanggal, tanggal, jam, status, keterangan, id_dokter, id_sesi)
                     VALUES('','$nama','$alamat',
@@ -133,10 +143,10 @@
                     setTimeout(function() {
                         swal({
                             title: 'Antrian $antrian',
-                            text: 'Berhasil Mendaftarkan',
+                            text: 'Mendaftar Poliklinik',
                             type: 'success'
                         }, function() {
-                            window.location = 'booking-cek';
+                            window.location = 'booking-tambah';
                         });
                     }, 10);
                 </script>";
@@ -159,7 +169,7 @@
           ?>
             <form method="post" action="" role="form">
               <div class="form-group">
-                <label>Nama</label>
+                <label>Nama Pasien</label>
                 <input class="form-control" type="text" name="nama" placeholder="Masukkan..">
                 <p style="color:red;"><?php echo ($error['nama']) ? $error['nama'] : ''; ?></p>
               </div>
@@ -212,11 +222,26 @@
                 <label>Keterangan</label>
                 <input class="form-control" type="text" name="keterangan" placeholder="Masukkan..">
               </div>
-              <button type="submit" name="submit" class="btn btn-success">Tambah</button>
+              <button type="submit" name="polisubmit" class="btn btn-success">Tambah</button>
               <button type="reset" class="btn btn-warning">Reset</button>  
             </form>
+            </div>
+            </div>
+            </div>
+            </div>
+
+            <div class="tab-pane fade in" id="2">
+            <div class="row">
+            <div class="col-lg-6">
+            <div class="table-responsive">
+                <?php include "tumbang-tambah.php"; ?>
+            </div>
+            </div>
+            </div>
+            </div>
           </div>
-        </div><!-- /.row -->
-      </div><br><br><?php include "../copyright.php";?><br><br><!-- /#page-wrapper -->
+        </div>
+        </div>
+      <br><br><?php include "../copyright.php";?><br><br><!-- /#page-wrapper -->
     </div><!-- /#wrapper -->
   <?php include "views/footer.php"; ?> 

@@ -16,7 +16,7 @@
         <?php include "../notifikasi1.php"?>
         <div class="alert alert-warning alert-dismissable">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          Untuk memperbarui daftar zona merah COVID-19 : <b>Copy jpg terbaru - explorer - network - RACHMI-SVR - folder redzone - paste - rename jpg menjadi redzone - kembali ke simetris - CTRL+F5</b>
+          Cara memperbarui daftar zona merah COVID-19 : <b>Copy jpg terbaru - explorer - network - RACHMI-SVR - folder redzone - paste - rename jpg menjadi redzone - kembali ke simetris - CTRL+F5</b>
         </div>
       </div>
       <div class="col-lg-12">
