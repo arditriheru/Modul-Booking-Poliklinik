@@ -112,6 +112,5 @@
              </div>
             </div>
            </div>
-      </div><br><?php include "../copyright.php";?><br><br><!-- /#page-wrapper -->
     </div><!-- /#wrapper -->
   <?php include "views/footer.php"; ?> 

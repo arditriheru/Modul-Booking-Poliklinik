@@ -6,82 +6,63 @@
 	$mak   = date("Y-m-d", $nextN);
 
 	function format_mak($mak)
-                    {
-                        $bulan = array (1 =>   'Januari',
-                                    'Februari',
-                                    'Maret',
-                                    'April',
-                                    'Mei',
-                                    'Juni',
-                                    'Juli',
-                                    'Agustus',
-                                    'September',
-                                    'Oktober',
-                                    'November',
-                                    'Desember'
-                                );
-                        $split = explode('-', $mak);
-                        return $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
-                    }
+    {
+      $bulan = array (1 =>   'Januari',
+        'Februari',
+        'Maret',
+        'April',
+        'Mei',
+        'Juni',
+        'Juli',
+        'Agustus',
+        'September',
+        'Oktober',
+        'November',
+        'Desember'
+      );
+    $split = explode('-', $mak);
+    return $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
+  }
 ?>
-    <nav>
+  <nav>
     <div id="wrapper">
       <?php include "menu.php"; ?>   
-        </div><!-- /.navbar-collapse -->
-      </nav>
-      <div id="page-wrapper">
-        <div class="row">
-          <div class="col-lg-12">
-            <h1>Form <small>Tambah</small></h1>
-            <ol class="breadcrumb">
-              <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-              <li class="active"><i class="fa fa-plus"></i> Tambah</li>
-            </ol>
-            <?php include "../notifikasi1.php"?>
-            <div class="alert alert-warning alert-dismissable">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <font size='3'>Registrasi maksimal sampai tanggal <b><?php echo format_mak($mak);?></font></b>
-            </div>
-          </div>
-        </div><!-- /.row -->
-        <div class="row">
-        <div class="col-lg-12">
-              <a href="covid-skrining">
-                <button type="submit" class="btn btn-warning">Skrining</button>
-              </a>
-            </div>
-        </div><br>
-        <div class="row">
-          <div class="table-responsive">
-            <form method="post" action="booking-tambah-cari-rm" role="form">
-            <div class="col-lg-6">
-              <div class="form-group">
-                <label>Nomor RM</label>
-                <input class="form-control" type="text" name="id_catatan_medik" placeholder="Nomor Rekam Medik">
-              </div><button type="submit" class="btn btn-success">Cari</button>
-          	</div>
-      		</form>
-      		<form method="post" action="booking-tambah-cari-nama" role="form">
-          <div class="col-lg-6">
-              <div class="form-group">
-                <label>Nama</label>
-                <input class="form-control" type="text" name="nama" placeholder="Nama Pasien"">
-              </div><button type="submit" class="btn btn-success">Cari</button>
-            </div>
-            </form>
-           </div>
-        </div><br><br><!-- /.row -->
-        <div class="table-responsive">
-          <ul class="nav nav-pills" style="margin-bottom: 15px;">
-            <li class="active"><a href="#1" data-toggle="tab">Poliklinik</a></li>
-            <li><a href="#2" data-toggle="tab">Tumbuh Kembang</a></li>
-          </ul>
-          <div id="myTabContent" class="tab-content">
-            <div class="tab-pane fade active in" id="1">
-            <div class="row">
-            <div class="col-lg-6">
-            <div class="table-responsive">
-                <h3 align="center">Poliklinik</h3>
+    </div><!-- /.navbar-collapse -->
+  </nav>
+  <div id="page-wrapper">
+  <div class="row">
+  <div class="col-lg-12">
+    <h1>Daftar <small>Poliklinik</small></h1>
+    <ol class="breadcrumb">
+      <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+      <li class="active"><i class="fa fa-plus"></i> Tambah</li>
+    </ol>
+    <?php include "../notifikasi1.php"?>
+    <div class="alert alert-warning alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <font size='3'>Registrasi maksimal sampai tanggal <b><?php echo format_mak($mak);?></font></b>
+    </div>
+  </div>
+  </div><!-- /.row -->
+  <div class="row">
+    <div class="table-responsive">
+      <form method="post" action="booking-tambah-cari-rm" role="form">
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label>Nomor RM</label>
+            <input class="form-control" type="text" name="id_catatan_medik" placeholder="Nomor Rekam Medik">
+          </div><button type="submit" class="btn btn-success">Cari</button>
+        </div>
+      </form>
+      <form method="post" action="booking-tambah-cari-nama" role="form">
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label>Nama</label>
+            <input class="form-control" type="text" name="nama" placeholder="Nama Pasien">
+          </div><button type="submit" class="btn btn-success">Cari</button>
+        </div>
+      </form>
+      <div class="col-lg-6">
             <?php
               if(isset($_POST['polisubmit'])){
                 include '../koneksi.php';
@@ -165,7 +146,7 @@
                 }
               }
             }
-          ?>
+          ?><br><br>
             <form method="post" action="" role="form">
               <div class="form-group">
                 <label>Nama Pasien</label>
@@ -224,22 +205,8 @@
               <button type="submit" name="polisubmit" class="btn btn-success">Tambah</button>
               <button type="reset" class="btn btn-warning">Reset</button>  
             </form>
-            </div>
-            </div>
-            </div>
-            </div>
-
-            <div class="tab-pane fade in" id="2">
-            <div class="row">
-            <div class="col-lg-6">
-            <div class="table-responsive">
-                <?php include "tumbang-tambah.php"; ?>
-            </div>
-            </div>
-            </div>
-            </div>
           </div>
-        </div>
-      <br><br><?php include "../copyright.php";?><br><br><!-- /#page-wrapper -->
-    </div><!-- /#wrapper -->
+    </div>
+  </div><br><br><!-- /.row -->
+  </div><!-- /#wrapper -->
   <?php include "views/footer.php"; ?> 

@@ -19,10 +19,18 @@
             <li><a href="booking-cek"><i class="fa fa-check-square-o"></i> Hari Ini</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-plus"></i> Booking <b class="caret"></b></a>
+                <i class="fa fa-plus"></i> Poliklinik <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="booking-filter">Lihat</a></li>
                 <li><a href="booking-tambah">Tambah</a></li>
+              </ul>
+            </li>
+             <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-plus"></i> Tumbang <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="tumbang-filter">Lihat</a></li>
+                <li><a href="tumbang-tambah">Tambah</a></li>
               </ul>
             </li>
             <li><a href="covid-skrining"><i class="fa fa-thumb-tack"></i> Skrining</a></li>

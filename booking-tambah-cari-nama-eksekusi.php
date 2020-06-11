@@ -1,40 +1,34 @@
 <?php include "readme.php";?>
 <?php include "views/header.php"; ?>
-    <nav>
+  <nav>
     <div id="wrapper">
       <?php include "menu.php"; ?>   
-        </div><!-- /.navbar-collapse -->
-      </nav>
-      <div id="page-wrapper">
-        <div class="row">
-          <div class="col-lg-12">
-            <h1>Form <small>Tambah</small></h1>
-            <ol class="breadcrumb">
-              <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-              <li class="active"><i class="fa fa-edit"></i> Form</a></li>
-            </ol>
-            <?php include "../notifikasi1.php"?>
-            </div>
-                    <div class="col-lg-12">
-        <div class="table-responsive">
-          <ul class="nav nav-pills" style="margin-bottom: 15px;">
-            <li class="active"><a href="#1" data-toggle="tab">Poliklinik</a></li>
-            <li><a href="#2" data-toggle="tab">Tumbuh Kembang</a></li>
-          </ul>
-          <div id="myTabContent" class="tab-content">
-            <div class="tab-pane fade active in" id="1">
-            <div class="row">
-            <div class="col-lg-6">
-            <div class="table-responsive">
-                <h3 align="center">Poliklinik</h3>
-            <?php 
-                include '../koneksi.php';
-                $id_register = $_GET['id_register'];
-                $data = mysqli_query($koneksi,
-                    "SELECT * FROM mr_pasien WHERE id_register=$id_register;");
-                while($d = mysqli_fetch_array($data)){
-            ?>
-            <?php
+    </div><!-- /.navbar-collapse -->
+  </nav>
+  <div id="page-wrapper">
+  <div class="row">
+  <div class="col-lg-12">
+    <h1>Daftar <small>Poliklinik</small></h1>
+    <ol class="breadcrumb">
+      <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+      <li class="active"><i class="fa fa-edit"></i> Form</a></li>
+    </ol>
+    <?php include "../notifikasi1.php"?>
+  </div>
+  <div class="col-lg-6">
+  <div class="table-responsive">
+    <?php 
+      include '../koneksi.php';
+      $id_register = $_GET['id_register'];
+      $data = mysqli_query($koneksi,"SELECT * FROM mr_pasien WHERE id_register=$id_register;");
+      while($d = mysqli_fetch_array($data)){
+      $id_catatan_medik = $d['id_catatan_medik'];
+      $nama             = $d['nama'];
+      $alamat           = $d['alamat'];
+      $telp             = $d['telp'];
+      }
+    ?>
+    <?php
               if(isset($_POST['submit'])){
                 include '../koneksi.php';
                 date_default_timezone_set("Asia/Jakarta");
@@ -137,25 +131,25 @@
               <div class="form-group">
                 <label>Nomor Rekam Medik</label>
                 <input class="form-control" type="text" name="id_catatan_medik"
-                value="<?php echo $d['id_catatan_medik']; ?>" readonly>
+                value="<?php echo $id_catatan_medik; ?>" readonly>
                 <p style="color:red;"><?php echo ($error['id_catatan_medik']) ? $error['id_catatan_medik'] : ''; ?></p>
               </div>
               <div class="form-group">
                 <label>Nama</label>
                 <input class="form-control" type="text" name="nama"
-                value="<?php echo $d['nama']; ?>" readonly>
+                value="<?php echo $nama; ?>" readonly>
                 <p style="color:red;"><?php echo ($error['nama']) ? $error['nama'] : ''; ?></p>
               </div>
               <div class="form-group">
                 <label>Alamat</label>
                 <input class="form-control" type="text" name="alamat"
-                value="<?php echo $d['alamat']; ?>" required="">
+                value="<?php echo $alamat; ?>" required="">
                 <p style="color:red;"><?php echo ($error['alamat']) ? $error['alamat'] : ''; ?></p>
               </div>
               <div class="form-group">
                 <label>Kontak</label>
                 <input class="form-control" type="text" name="kontak"
-                value="<?php echo $d['telp']; ?>" required="">
+                value="<?php echo $telp; ?>" required="">
                 <p style="color:red;"><?php echo ($error['kontak']) ? $error['kontak'] : ''; ?></p>
               </div>
               <div class="form-group">
@@ -202,26 +196,9 @@
               </div>
               <button type="submit" name="submit" class="btn btn-success">Tambah</button>
               <button type="reset" class="btn btn-warning">Reset</button>  
-            </form><?php } ?>
-            </div>
-            </div>
-            </div>
-            </div>
-
-            <div class="tab-pane fade in" id="2">
-            <div class="row">
-            <div class="col-lg-6">
-            <div class="table-responsive">
-                <?php include "tumbang-tambah-cari-nama-eksekusi.php";?>
-            </div>
-            </div>
-            </div>
-            </div>
-          </div>
-        </div>
-        </div>
-          </div>
-        </div><!-- /.row -->
-      <br><br><?php include "../copyright.php";?><br><br><!-- /#page-wrapper -->
-    </div><!-- /#wrapper -->
+            </form>
+  </div>
+  </div>
+  </div><!-- /.row -->
+  </div><!-- /#wrapper -->
     <?php include "views/footer.php"; ?>

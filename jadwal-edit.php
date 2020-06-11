@@ -109,6 +109,5 @@
           </div>
         </div><!-- /.row -->
       <?php } ?>
-      </div><br><br><?php include "../copyright.php";?><br><br><!-- /#page-wrapper -->
     </div><!-- /#wrapper -->
     <?php include "views/footer.php"; ?>

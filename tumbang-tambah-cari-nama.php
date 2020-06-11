@@ -8,7 +8,7 @@
   <div id="page-wrapper">
     <div class="row">
     <div class="col-lg-12">
-      <h1>Daftar <small>Poliklinik</small></h1>
+      <h1>Daftar <small>Tumbuh Kembang</small></h1>
       <ol class="breadcrumb">
         <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li><a href="booking-tambah"><i class="fa fa-plus"></i> Tambah</a></li>
@@ -46,7 +46,7 @@
             <td><center><?php echo $d['tempat']; ?>, <?php echo date("d F Y", strtotime($tgl_lahir)); ?></td>
             <td>
               <div align="center">
-                <a href="booking-tambah-cari-nama-eksekusi?id_register=<?php echo $d['id_register']; ?>"
+                <a href="tumbang-tambah-cari-nama-eksekusi?id_register=<?php echo $d['id_register']; ?>"
                 <button type="button" class="btn btn-success">Daftar</a><br><br>
               </div>
             </td>

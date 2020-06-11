@@ -1,4 +1,68 @@
-          <h3 align="center">Tumbuh Kembang</h3>
+<?php include "readme.php";?>
+<?php 
+  include "views/header.php";
+  $m = 31;
+  $nextN = mktime(0, 0, 0, date("m"), date("d") + $m, date("Y"));
+  $mak   = date("Y-m-d", $nextN);
+
+  function format_mak($mak)
+    {
+      $bulan = array (1 =>   'Januari',
+        'Februari',
+        'Maret',
+        'April',
+        'Mei',
+        'Juni',
+        'Juli',
+        'Agustus',
+        'September',
+        'Oktober',
+        'November',
+        'Desember'
+      );
+    $split = explode('-', $mak);
+    return $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
+  }
+?>
+  <nav>
+    <div id="wrapper">
+      <?php include "menu.php"; ?>   
+    </div><!-- /.navbar-collapse -->
+  </nav>
+  <div id="page-wrapper">
+  <div class="row">
+  <div class="col-lg-12">
+    <h1>Daftar <small>Tumbuh Kembang</small></h1>
+    <ol class="breadcrumb">
+      <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+      <li class="active"><i class="fa fa-plus"></i> Tambah</li>
+    </ol>
+    <?php include "../notifikasi1.php"?>
+    <div class="alert alert-warning alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <font size='3'>Registrasi maksimal sampai tanggal <b><?php echo format_mak($mak);?></font></b>
+    </div>
+  </div>
+  </div><!-- /.row -->
+  <div class="row">
+    <div class="table-responsive">
+      <form method="post" action="tumbang-tambah-cari-rm" role="form">
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label>Nomor RM</label>
+            <input class="form-control" type="text" name="id_catatan_medik" placeholder="Nomor Rekam Medik">
+          </div><button type="submit" class="btn btn-success">Cari</button>
+        </div>
+      </form>
+      <form method="post" action="tumbang-tambah-cari-nama" role="form">
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label>Nama</label>
+            <input class="form-control" type="text" name="nama" placeholder="Nama Pasien">
+          </div><button type="submit" class="btn btn-success">Cari</button>
+        </div>
+      </form>
+      <div class="col-lg-6">
             <?php
               if(isset($_POST['tumbangsubmit'])){
                 include '../koneksi.php';
@@ -60,7 +124,7 @@
                             text: 'Mendaftar Tumbuh Kembang',
                             type: 'success'
                         }, function() {
-                            window.location = 'booking-tambah';
+                            window.location = 'tumbang-tambah';
                         });
                     }, 10);
                 </script>";
@@ -72,7 +136,7 @@
                             text: 'Hilangkan Tanda Petik di Nama Pasien',
                             type: 'error'
                         }, function() {
-                            window.location = 'booking-tambah';
+                            window.location = 'tumbang-tambah';
                         });
                     }, 10);
                 </script>";
@@ -80,7 +144,7 @@
                 }
               }
             }
-          ?>
+          ?><br><br>
             <form method="post" action="" role="form">
               <div class="form-group">
                 <label>Nama Pasien</label>
@@ -129,3 +193,8 @@
               <button type="submit" name="tumbangsubmit" class="btn btn-success">Tambah</button>
               <button type="reset" class="btn btn-warning">Reset</button>  
             </form>
+            </div>
+    </div>
+  </div><br><br><!-- /.row -->
+  </div><!-- /#wrapper -->
+  <?php include "views/footer.php"; ?> 

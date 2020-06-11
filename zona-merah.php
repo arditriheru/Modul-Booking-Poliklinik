@@ -22,7 +22,6 @@
       <div class="col-lg-12">
         <img class="img-responsive" src="../redzone/redzone.jpg" width="100%" alt="Gambar Bootstrap 3">
       </div>
-    </div><!-- /.row --><br><br><?php include "../copyright.php";?>
   </div><!-- /#page-wrapper -->
   </div><!-- /#wrapper -->
 <?php include "views/footer.php"; ?>

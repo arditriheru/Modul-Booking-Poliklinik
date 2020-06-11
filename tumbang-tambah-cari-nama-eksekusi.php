@@ -1,11 +1,33 @@
-          <h3 align="center">Tumbuh Kembang</h3>
-            <?php 
-              include '../koneksi.php';
-              $id_catatan_medik = $_POST['id_catatan_medik'];
-              $data = mysqli_query($koneksi,
-                  "SELECT * FROM mr_pasien WHERE id_register=$id_register;");
-              while($d = mysqli_fetch_array($data)){
-            ?>
+<?php include "readme.php";?>
+<?php include "views/header.php"; ?>
+  <nav>
+    <div id="wrapper">
+      <?php include "menu.php"; ?>   
+    </div><!-- /.navbar-collapse -->
+  </nav>
+  <div id="page-wrapper">
+  <div class="row">
+  <div class="col-lg-12">
+    <h1>Daftar <small>Tumbuh Kembang</small></h1>
+    <ol class="breadcrumb">
+      <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+      <li class="active"><i class="fa fa-edit"></i> Form</a></li>
+    </ol>
+    <?php include "../notifikasi1.php"?>
+  </div>
+  <div class="col-lg-6">
+  <div class="table-responsive">
+    <?php 
+      include '../koneksi.php';
+      $id_register = $_GET['id_register'];
+      $data = mysqli_query($koneksi,"SELECT * FROM mr_pasien WHERE id_register=$id_register;");
+      while($d = mysqli_fetch_array($data)){
+      $id_catatan_medik = $d['id_catatan_medik'];
+      $nama             = $d['nama'];
+      $alamat           = $d['alamat'];
+      $telp             = $d['telp'];
+      }
+    ?>
             <?php
               if(isset($_POST['tumbangsubmit'])){
                 include '../koneksi.php';
@@ -54,7 +76,7 @@
                 }if (empty($sesi)){
                   $error['sesi']='Sesi Harus Diisi!!!';
                 }if($selisih>30){
-                echo "<script>alert('GAGAL!!! Lebih dari 30 Hari!');document.location='booking-tambah'</script>";
+                echo "<script>alert('GAGAL!!! Lebih dari 30 Hari!');document.location='tumbang-tambah'</script>";
                   break;
                 }if(empty($error)){
                   $simpan=mysqli_query($koneksi,"INSERT INTO tumbang (id_tumbang, id_catatan_medik, id_petugas, nama, alamat, kontak, jadwal, sesi, tanggal, jam, status, keterangan)
@@ -67,7 +89,7 @@
                             text: 'Mendaftar Tumbuh Kembang',
                             type: 'success'
                         }, function() {
-                            window.location = 'booking-tambah';
+                            window.location = 'tumbang-tambah';
                         });
                     }, 10);
                 </script>";
@@ -79,7 +101,7 @@
                             text: 'Hilangkan Tanda Petik di Nama Pasien',
                             type: 'error'
                         }, function() {
-                            window.location = 'booking-tambah';
+                            window.location = 'tumbang-tambah';
                         });
                     }, 10);
                 </script>";
@@ -92,25 +114,25 @@
               <div class="form-group">
                 <label>Nomor Rekam Medik</label>
                 <input class="form-control" type="text" name="id_catatan_medik"
-                value="<?php echo $d['id_catatan_medik']; ?>" readonly>
+                value="<?php echo $id_catatan_medik; ?>" readonly>
                 <p style="color:red;"><?php echo ($error['id_catatan_medik']) ? $error['id_catatan_medik'] : ''; ?></p>
               </div>
               <div class="form-group">
                 <label>Nama Pasien</label>
                 <input class="form-control" type="text" name="nama"
-                value="<?php echo $d['nama']; ?>" readonly>
+                value="<?php echo $nama; ?>" readonly>
                 <p style="color:red;"><?php echo ($error['nama']) ? $error['nama'] : ''; ?></p>
               </div>
               <div class="form-group">
                 <label>Alamat</label>
                 <input class="form-control" type="text" name="alamat"
-                value="<?php echo $d['alamat']; ?>" required="">
+                value="<?php echo $alamat; ?>" required="">
                 <p style="color:red;"><?php echo ($error['alamat']) ? $error['alamat'] : ''; ?></p>
               </div>
               <div class="form-group">
                 <label>Kontak</label>
                 <input class="form-control" type="text" name="kontak"
-                value="<?php echo $d['telp']; ?>" required="">
+                value="<?php echo $telp; ?>" required="">
                 <p style="color:red;"><?php echo ($error['kontak']) ? $error['kontak'] : ''; ?></p>
               </div>
               <div class="form-group">
@@ -144,4 +166,9 @@
               </div>
               <button type="submit" name="tumbangsubmit" class="btn btn-success">Tambah</button>
               <button type="reset" class="btn btn-warning">Reset</button>  
-            </form><?php } ?>
+            </form>
+  </div>
+  </div>
+  </div><!-- /.row -->
+  </div><!-- /#wrapper -->
+  <?php include "views/footer.php"; ?>
