@@ -176,6 +176,7 @@
               </div>
               <div class="form-group">
                 <label>Sesi</label>
+                <p class="bluetext"><b>Pagi :</b> 07.00 - 10.59 | <b>Siang :</b> 11.00 - 14.59 | <b>Sore :</b> 15.00 - 17.59 | <b>Malam :</b> 18.00 - selesai</p>
                 <select class="form-control" type="text" name="id_sesi"
                 value="<?php echo $d['id_sesi']; ?>" required="">
                 <p style="color:red;"><?php echo ($error['id_sesi']) ? $error['id_sesi'] : ''; ?></p>
