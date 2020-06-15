@@ -58,10 +58,11 @@ $jadwal      = $_POST['jadwal'];
                                     date_default_timezone_set("Asia/Jakarta");
                                     $tanggalHariIni=date('Y-m-d');
                                     $data = mysqli_query($koneksi,
-                                      "SELECT *, tumbang_petugas.nama_petugas,
+                                      "SELECT *, tumbang_petugas.nama_petugas, sesi.nama_sesi,
                                       IF (tumbang.status='1', 'Datang', 'Belum Datang') AS status
-                                      FROM tumbang, tumbang_petugas
+                                      FROM tumbang, tumbang_petugas, sesi
                                       WHERE tumbang.id_petugas=tumbang_petugas.id_petugas
+                                      AND tumbang.id_sesi=sesi.id_sesi
                                       AND tumbang.jadwal = '$jadwal'
                                       AND tumbang.id_petugas='$id_petugas' ORDER BY tumbang.id_tumbang ASC;");
                                     while($d = mysqli_fetch_array($data)){
@@ -74,7 +75,7 @@ $jadwal      = $_POST['jadwal'];
                                                 <td><center><?php echo $d['kontak']; ?></td>
                                                   <td><center><?php echo $d['nama_petugas']; ?></td>
                                                     <td><center><?php echo $d['jadwal']; ?></td>
-                                                      <td><center><?php echo $d['sesi']; ?></td>
+                                                      <td><center><?php echo $d['nama_sesi']; ?></td>
                                                         <td><center><?php echo $d['status']; ?></td>
                                                           <td><center><?php echo $d['keterangan']; ?></td>
                                                             <td>

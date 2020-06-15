@@ -124,8 +124,9 @@
                                                                   date_default_timezone_set("Asia/Jakarta");
                                                                   $tanggalsekarang=date('Y-m-d');
                                                                   $no = 1;
-                                                                  $data = mysqli_query($koneksi,"SELECT *, tumbang_petugas.nama_petugas FROM tumbang, tumbang_petugas
+                                                                  $data = mysqli_query($koneksi,"SELECT *, tumbang_petugas.nama_petugas, sesi.nama_sesi FROM tumbang, tumbang_petugas, sesi
                                                                     WHERE tumbang.id_petugas=tumbang_petugas.id_petugas
+                                                                    AND tumbang.id_sesi=sesi.id_sesi
                                                                     AND tumbang.tanggal = '$tanggalsekarang'
                                                                     ORDER BY tumbang.id_tumbang DESC;");
                                                                     while($d = mysqli_fetch_array($data)){
@@ -141,7 +142,7 @@
                                                                     <td><center><?php echo $d['nama_petugas']; ?>
                                                                     </td>
                                                                     <td><center><?php echo date("d/m/Y", strtotime($jadwal)); ?></td>
-                                                                    <td><center><?php echo $d['sesi']; ?>
+                                                                    <td><center><?php echo $d['nama_sesi']; ?>
                                                                     </td>
                                                                     <td><center><?php echo $d['keterangan']; ?>
                                                                     </td>

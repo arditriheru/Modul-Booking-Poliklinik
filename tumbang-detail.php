@@ -45,10 +45,11 @@
           <?php 
           include '../koneksi.php';
           $data = mysqli_query($koneksi,
-            "SELECT *, tumbang_petugas.nama_petugas,
+            "SELECT *, tumbang_petugas.nama_petugas, sesi.nama_sesi,
             IF (tumbang.status='1', 'Datang', 'Belum Datang') AS status
-            FROM tumbang, tumbang_petugas
+            FROM tumbang, tumbang_petugas, sesi
             WHERE tumbang.id_petugas=tumbang_petugas.id_petugas
+            AND tumbang.id_sesi=sesi.id_sesi
             AND tumbang.id_tumbang=$id_tumbang;");
           while($d = mysqli_fetch_array($data)){
             $jadwal = $d['jadwal'];
@@ -117,7 +118,7 @@
               </tr>
               <tr>
                 <td><b>Sesi</b></td>
-                <td><?php echo $d['sesi']; ?></td>
+                <td><?php echo $d['nama_sesi']; ?></td>
               </tr>
               <tr>
                 <td><b>Registrasi</b></td>

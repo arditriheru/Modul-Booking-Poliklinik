@@ -27,7 +27,7 @@
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="fa fa-plus"></i> Tum-Bang <b class="caret"></b></a>
+            <i class="fa fa-plus"></i> Tumbuh Kembang <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="tumbang-filter">Lihat</a></li>
               <li><a href="tumbang-tambah">Tambah</a></li>

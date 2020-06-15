@@ -41,7 +41,7 @@
           $kontak           = $_POST['kontak'];
           $id_petugas       = $_POST['id_petugas'];
           $jadwal           = $_POST['jadwal'];
-          $sesi             = $_POST['sesi'];
+          $id_sesi          = $_POST['id_sesi'];
           $tanggal          = $tanggal;
           $jam              = $jam;
           $status           = '0';
@@ -57,7 +57,7 @@
             FROM tumbang
             WHERE id_petugas='$id_petugas'
             AND jadwal='$jadwal'
-            AND sesi='$sesi';");
+            AND id_sesi='$id_sesi';");
           while($b = mysqli_fetch_array($a)){
 
             $antrian       =  $b['antrian']+1;
@@ -73,14 +73,14 @@
               $error['id_petugas']='Petugas Harus Diisi!!!';
             }if (empty($jadwal)){
               $error['jadwal']='Tanggal Harus Diisi!!!';
-            }if (empty($sesi)){
-              $error['sesi']='Sesi Harus Diisi!!!';
+            }if (empty($id_sesi)){
+              $error['id_sesi']='Sesi Harus Diisi!!!';
             }if($selisih>30){
               echo "<script>alert('GAGAL!!! Lebih dari 30 Hari!');document.location='tumbang-tambah'</script>";
               break;
             }if(empty($error)){
-              $simpan=mysqli_query($koneksi,"INSERT INTO tumbang (id_tumbang, id_catatan_medik, id_petugas, nama, alamat, kontak, jadwal, sesi, tanggal, jam, status, keterangan)
-                VALUES('','$id_catatan_medik','$id_petugas','$nama','$alamat','$kontak','$jadwal','$sesi','$tanggal','$jam','$status','$keterangan')");
+              $simpan=mysqli_query($koneksi,"INSERT INTO tumbang (id_tumbang, id_catatan_medik, id_petugas, nama, alamat, kontak, jadwal, id_sesi, tanggal, jam, status, keterangan)
+                VALUES('','$id_catatan_medik','$id_petugas','$nama','$alamat','$kontak','$jadwal','$id_sesi','$tanggal','$jam','$status','$keterangan')");
               if($simpan){
                 echo "<script>
                 setTimeout(function() {
@@ -157,8 +157,19 @@
                       </div>
                       <div class="form-group">
                         <label>Sesi</label>
-                        <input class="form-control" type="text" name="sesi">
-                        <p style="color:red;"><?php echo ($error['sesi']) ? $error['sesi'] : ''; ?></p>
+                        <p class="bluetext"><b>Pagi :</b> 07.00 - 10.59 | <b>Siang :</b> 11.00 - 14.59 | <b>Sore :</b> 15.00 - 17.59 | <b>Malam :</b> 18.00 - selesai</p>
+                        <select class="form-control" type="text" name="id_sesi" required="">
+                          <p style="color:red;"><?php echo ($error['id_sesi']) ? $error['id_sesi'] : ''; ?></p>
+                          <option disabled selected>Pilih</option>
+                          <?php 
+                          include '../koneksi.php';
+                          $data = mysqli_query($koneksi,
+                            "SELECT * FROM sesi;");
+                          while($d = mysqli_fetch_array($data)){
+                            echo "<option value='".$d['id_sesi']."'>".$d['nama_sesi']."</option>";
+                          }
+                          ?>
+                        </select>
                       </div>
                       <div class="form-group">
                         <label>Keterangan</label>

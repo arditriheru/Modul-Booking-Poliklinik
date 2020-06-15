@@ -54,10 +54,11 @@
                               include '../koneksi.php';
                               $no = 1;
                               $data = mysqli_query($koneksi,
-                                "SELECT *, tumbang_petugas.nama_petugas,
+                                "SELECT *, tumbang_petugas.nama_petugas, sesi.nama_sesi,
                                 IF (tumbang.status='1', 'Datang', 'Belum Datang') AS status
-                                FROM tumbang, tumbang_petugas
+                                FROM tumbang, tumbang_petugas, sesi
                                 WHERE tumbang.id_petugas=tumbang_petugas.id_petugas
+                                AND tumbang.id_sesi=sesi.id_sesi
                                 AND tumbang.jadwal='$tanggalHariIni'
                                 ORDER BY tumbang.nama ASC;");
                               while($d = mysqli_fetch_array($data)){
@@ -67,7 +68,7 @@
                                   <td><center><?php echo $d['id_catatan_medik']; ?></td>
                                     <td><center><?php echo $d['nama']; ?></td>
                                       <td><center><?php echo $d['nama_petugas']; ?></td>
-                                        <td><center><?php echo $d['sesi']; ?></td>
+                                        <td><center><?php echo $d['nama_sesi']; ?></td>
                                           <td><center><?php echo $d['status']; ?></td>
                                             <td><center><?php echo $d['keterangan']; ?></td>
                                               <td>
