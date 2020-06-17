@@ -1,48 +1,23 @@
-<?php include "views/header.php"; ?>
-<body>
-  <nav>
-    <div id="wrapper">
-    </div><!-- /.navbar-collapse -->
-  </nav>
-  <div id="page-wrapper">
-    <div class="row">
-      <div class="col-lg-12">
-        <?php include "notifikasi1.php"?>
-      </div>
-    </div><!-- /.row -->
-    <div class="row">
-      <div class="col-lg-12">
-        <?php
-        if(isset($_POST['polisubmit'])){
-          echo "<script>
-          setTimeout(function() {
-            swal({
-              title: 'Poli',
-              text: 'Mendaftar Poli',
-              type: 'success'
-              }, function() {
-                window.location = 'tes';
-                });
-                }, 10);
-                </script>";
-              }
-              if(isset($_POST['tumbangsubmit'])){
-                echo "<script>
-                setTimeout(function() {
-                  swal({
-                    title: 'Tumbang',
-                    text: 'Mendaftar Tumbuh Kembang',
-                    type: 'success'
-                    }, function() {
-                      window.location = 'tes';
-                      });
-                      }, 10);
-                      </script>";
-                    }
-                    ?>
-                    <form method="post" action="" role="form">
-                      <button type="submit" name="polisubmit" class="btn btn-success">Poli</button>
-                      <button type="submit" name="tumbangsubmit" class="btn btn-success">Tumbang</button>
-                    </form>
-                    </div><br><br><br><?php include "copyright.php";?>
-                    <?php include "views/footer.php"; ?>
+<?php
+include '../koneksi.php';
+$booking_tanggal= date('Y-m-d');
+
+$namahari = date('l', strtotime($booking_tanggal));
+$data = mysqli_query($koneksi,
+	"SELECT kuota_hari FROM dokter WHERE id_dokter='1';");
+while($d = mysqli_fetch_array($data)){
+	$kuota_hari = $d['kuota_hari'];
+}
+echo 'Jadwal = '.$namahari.'<br>'.'Kuota = '.$kuota_hari.'<br>';
+
+$a1 = explode (", ",$kuota_hari);
+$a2=array("$namahari");
+$result=array_intersect($a1,$a2);
+ // print_r($result);
+
+if(!$namahari == $result){
+	echo "Tidak Sama";
+}else{
+	echo "Sama";
+}
+?>

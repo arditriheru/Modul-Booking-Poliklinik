@@ -53,7 +53,7 @@
                           <button type="reset" class="btn btn-warning">Reset</button>  
                         </form>
                       </div>
-                      <div class="col-lg-6">
+                      <div class="col-lg-9">
                         <table class="table table-bordered table-hover table-striped tablesorter">
                           <thead>
                             <tr>
