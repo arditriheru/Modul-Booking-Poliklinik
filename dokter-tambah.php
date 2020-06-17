@@ -26,7 +26,7 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="table-responsive">
-                  <div class="col-lg-6">
+                  <div class="col-lg-12">
                     <h3 align="center">Poliklinik</h3>
                     <?php
                     if(isset($_POST['tambah'])){
@@ -37,6 +37,8 @@
                       $id_unit = $_POST['id_unit'];
                       $aktif = '0';
                       $ket = '0';
+                      $kuota_status = '0';
+                      $kuota = '0';
 
                       $error=array();
                       if (empty($nama_dokter)){
@@ -93,72 +95,79 @@
                                     <button type="reset" class="btn btn-warning">Reset</button>  
                                   </form>
                                 </div>
-                                <div class="col-lg-6">
+                                <br>
+                                <div class="col-lg-12">
                                   <table class="table table-bordered table-hover table-striped tablesorter">
                                     <thead>
                                       <tr>
-                                        <th><center>No</th>
-                                          <th><center>Nama Dokter</th>
-                                            <th><center>Status</th>
-                                              <th><center>Action</th>
-                                              </tr>
-                                            </thead>
-                                            <tbody>
-                                              <?php 
-                                              include '../koneksi.php';
-                                              $no = 1;
-                                              $data = mysqli_query($koneksi,
-                                                "SELECT *,  IF (status='1', 'Aktif', 'Nonaktif') AS status FROM dokter;");
-                                              while($d = mysqli_fetch_array($data)){
-                                                $status = $d['status'];
-                                                ?>
-                                                <tr>
-                                                  <td><center><?php echo $no++; ?></td>
-                                                    <td><left><?php echo $d['nama_dokter']; ?></td>
-                                                     <td><center>
-                                                      <?php
-                                                      if($status='1'){
-                                                        echo $d['status'];
-                                                      }else{
-                                                        echo $d['nama_dokter'];
-                                                      }
-                                                      ?>
-                                                      
-                                                    </td>
-                                                    <td>
-                                                      <div align="center">
-                                                        <a href="dokter-edit?id=<?php echo $d['id_dokter']; ?>"
-                                                          <button type="button" class="btn btn-warning">Edit</a>
-                                                            <a href="dokter-hapus?id=<?php echo $d['id_dokter']; ?>"
-                                                             onclick="javascript: return confirm('Anda yakin hapus?')"
-                                                             <button type="button" name="hapus" class="btn btn-danger">Hapus</a><br><br>
-                                                             </div>
-                                                           </td>
-                                                         </tr>
-                                                         <?php 
-                                                       }
-                                                       ?>
-                                                     </tbody>
-                                                   </table>
-                                                 </div>
-                                               </div>
-                                             </div>
-                                           </div>
-                                         </div>
+                                        <th><center>No</center></th>
+                                        <th><center>Nama Dokter</center></th>
+                                        <th><center>Status Dokter</center></th>
+                                        <th><center>Kuota Pasien</center></th>
+                                        <th><center>Status Kuota</center></th>
+                                        <th><center>Kuota Hari</center></th>
+                                        <th><center>Action</center></th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <?php 
+                                      include '../koneksi.php';
+                                      $no = 1;
+                                      $data = mysqli_query($koneksi,
+                                        "SELECT *,  IF (status='1', 'Aktif', 'Nonaktif') AS status,IF (kuota_status='1', 'Aktif', 'Nonaktif') AS kuota_status FROM dokter;");
+                                      while($d = mysqli_fetch_array($data)){
+                                        $status = $d['status'];
+                                        ?>
+                                        <tr>
+                                          <td><center><?php echo $no++; ?></center></td>
+                                          <td><left><?php echo $d['nama_dokter']; ?></center></td>
+                                            <td><center>
+                                              <?php
+                                              if($status='1'){
+                                                echo $d['status'];
+                                              }else{
+                                                echo $d['nama_dokter'];
+                                              }
+                                              ?>
 
-                                         <div class="tab-pane fade in" id="2">
-                                          <div class="row">
-                                            <div class="col-lg-12">
-                                              <div class="table-responsive">
-                                                <div class="col-lg-6">
-                                                  <?php include "petugas-tambah.php";?>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
+                                            </td>
+                                            <td><center><?php echo $d['kuota']; ?> Pasien</center></td>
+                                            <td><center><?php echo $d['kuota_status']; ?></center></td>
+                                            <td><center><?php echo $d['kuota_hari']; ?></center></td>
+                                            <td>
+                                              <div align="center">
+                                                <a href="dokter-edit?id=<?php echo $d['id_dokter']; ?>"
+                                                  <button type="button" class="btn btn-warning">Edit</a>
+                                                    <a href="dokter-hapus?id=<?php echo $d['id_dokter']; ?>"
+                                                     onclick="javascript: return confirm('Anda yakin hapus?')"
+                                                     <button type="button" name="hapus" class="btn btn-danger"><i class="fa fa-trash-o"></i></a><br><br>
+                                                     </div>
+                                                   </td>
+                                                 </tr>
+                                                 <?php 
+                                               }
+                                               ?>
+                                             </tbody>
+                                           </table>
+                                         </div>
+                                       </div>
+                                     </div>
+                                   </div>
+                                 </div>
+
+                                 <div class="tab-pane fade in" id="2">
+                                  <div class="row">
+                                    <div class="col-lg-12">
+                                      <div class="table-responsive">
+                                        <div class="col-lg-3">
+                                          <?php include "petugas-tambah.php";?>
                                         </div>
                                       </div>
                                     </div>
                                   </div>
-                                </div><!-- /#wrapper -->
-                                <?php include "views/footer.php"; ?> 
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div><!-- /#wrapper -->
+                        <?php include "views/footer.php"; ?> 
