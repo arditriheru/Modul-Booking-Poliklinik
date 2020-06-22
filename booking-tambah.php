@@ -84,8 +84,7 @@ function format_mak($mak)
 
           $tglsekarang  = new DateTime();
           $jadwal     = new DateTime("$booking_tanggal");
-          $hasil      = $tglsekarang->diff($jadwal)->format("%a");
-          $selisih    = $hasil;
+          $selisih      = $tglsekarang->diff($jadwal)->format("%a");
                 // cek antrian
           $a = mysqli_query($koneksi,
             "SELECT COUNT(*) AS antrian
@@ -120,7 +119,7 @@ function format_mak($mak)
           if($kuota_status == 0){
             // Cek kuota_status tidak aktif
             if($selisih>30){
-              echo "<script>alert('GAGAL!!! Lebih dari 30 Hari!');document.location='booking-tambah'</script>";
+              echo "<script>alert('GAGAL Lebih dari 30 Hari!');document.location='booking-tambah'</script>";
             }elseif(empty($error)){
               $simpan=mysqli_query($koneksi,"INSERT INTO booking (id_booking, nama, alamat, kontak, id_catatan_medik, booking_tanggal, tanggal, jam, status, keterangan, id_dokter, id_sesi)
                 VALUES('','$nama','$alamat',
@@ -142,7 +141,7 @@ function format_mak($mak)
                       echo "<script>
                       setTimeout(function() {
                         swal({
-                          title: 'Gagal!!!',
+                          title: 'Gagal',
                           text: 'Hilangkan Tanda Petik di Nama Pasien',
                           type: 'error'
                           }, function() {
