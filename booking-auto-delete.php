@@ -1,5 +1,5 @@
 <?php
-include '../koneksi.php';
+include '../../config/connect.php';
 $lama = 7;
 $query = "DELETE FROM booking
           WHERE DATEDIFF(CURDATE(), booking_tanggal) > $lama";

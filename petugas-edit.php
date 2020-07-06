@@ -1,6 +1,4 @@
-<?php include "readme.php";?>
 <?php include "views/header.php"; ?>
-<?php  $id_petugas = $_GET['id']; ?>
 <nav>
   <div id="wrapper">
     <?php include "menu.php"; ?>   
@@ -14,20 +12,19 @@
         <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li class="active"><i class="fa fa-pencil"></i> Edit</li>
       </ol>
-      <?php include "../notifikasi1.php"?>
+      <?php include "../../system/welcome.php"?>
     </div>
   </div><!-- /.row -->
   <div class="row">
     <div class="col-lg-6">
-      <?php 
-      include '../koneksi.php';
+      <?php
+      $id_petugas = $_GET['id'];
       $data = mysqli_query($koneksi,
         "SELECT * FROM tumbang_petugas WHERE id_petugas='$id_petugas';");
       while($d = mysqli_fetch_array($data)){
         ?>
         <?php
         if(isset($_POST['submit'])){
-          include '../koneksi.php';
           $nama_petugas 	= $_POST['nama_petugas'];
           $status 		  = $_POST['status'];
 
@@ -78,7 +75,6 @@
                           <select class="form-control" type="text" name="status">
                             <p style="color:red;"><?php echo ($error['status']) ? $error['status'] : ''; ?></p>
                             <?php 
-                            include '../koneksi.php';
                             $data = mysqli_query($koneksi,
                               "SELECT status, IF(status='1', 'Aktif', 'Nonaktif') AS nama_status
                               FROM tumbang_petugas WHERE id_petugas='$id_petugas';");
@@ -97,6 +93,5 @@
                     </div>
                   </div><!-- /.row -->
                 <?php } ?>
-              </div><br><br><?php include "../copyright.php";?><br><br><!-- /#page-wrapper -->
-            </div><!-- /#wrapper -->
-            <?php include "views/footer.php"; ?> 
+              </div><!-- /#wrapper -->
+              <?php include "views/footer.php"; ?> 

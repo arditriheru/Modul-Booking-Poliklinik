@@ -1,4 +1,3 @@
-<?php include "readme.php";?>
 <?php include "views/header.php"; ?>
 <nav>
   <div id="wrapper">
@@ -14,14 +13,13 @@
         <li><a href="booking-tambah"><i class="fa fa-plus"></i> Tambah</a></li>
         <li class="active"><i class="fa fa-thumb-tack"></i> Skrining</li>
       </ol>
-      <?php include "../notifikasi1.php"?>
+      <?php include "../../system/welcome.php"?>
     </div>
   </div><!-- /.row -->
   <div class="row">
     <div class="col-lg-6">
       <?php
       if(isset($_POST['diagnosa'])){
-        include '../koneksi.php';
         $A1 = $_POST['a1'];
         $A2 = $_POST['a2'];
         $A3 = $_POST['a3'];

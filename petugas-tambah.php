@@ -1,13 +1,8 @@
           <h3 align="center">Tumbuh Kembang</h3>
           <?php
           if(isset($_POST['tambah'])){
-            include '../koneksi.php';
-                // menangkap data yang di kirim dari form
             $nama_petugas = $_POST['nama_petugas'];
-            $status = '1';
-                //$id_unit = $_POST['id_unit'];
-                //$aktif = '0';
-                //$ket = '0';
+            $status       = '1';
 
             $error=array();
             if (empty($nama_petugas)){
@@ -57,46 +52,42 @@
                         <table class="table table-bordered table-hover table-striped tablesorter">
                           <thead>
                             <tr>
-                              <th><center>No</th>
-                                <th><center>Nama Petugas</th>
-                                  <th><center>Status</th>
-                                    <th><center>Action</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <?php 
-                                    include '../koneksi.php';
-                                    $no = 1;
-                                    $data = mysqli_query($koneksi,
-                                      "SELECT *,  IF (status='1', 'Aktif', 'Nonaktif') AS status FROM tumbang_petugas;");
-                                    while($d = mysqli_fetch_array($data)){
-                                      $status = $d['status'];
-                                      ?>
-                                      <tr>
-                                        <td><center><?php echo $no++; ?></td>
-                                          <td><left><?php echo $d['nama_petugas']; ?></td>
-                                           <td><center>
-                                            <?php
-                                            if($status='1'){
-                                              echo $d['status'];
-                                            }else{
-                                              echo $d['nama_petugas'];
-                                            }
-                                            ?>
-                                            
-                                          </td>
-                                          <td>
-                                            <div align="center">
-                                              <a href="petugas-edit?id=<?php echo $d['id_petugas']; ?>"
-                                                <button type="button" class="btn btn-warning">Edit</a>
-                                                  <a href="petugas-hapus?id=<?php echo $d['id_petugas']; ?>"
-                                                   onclick="javascript: return confirm('Anda yakin hapus?')"
-                                                   <button type="button" name="hapus" class="btn btn-danger">Hapus</a><br><br>
-                                                   </div>
-                                                 </td>
-                                               </tr>
-                                               <?php 
-                                             }
-                                             ?>
-                                           </tbody>
-                                         </table>
+                              <th><center>No</center></th>
+                              <th><center>Nama Petugas</center></th>
+                              <th><center>Status</center></th>
+                              <th><center>Action</center></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <?php 
+                            $no = 1;
+                            $data = mysqli_query($koneksi,
+                              "SELECT *,  IF (status='1', 'Aktif', 'Nonaktif') AS status FROM tumbang_petugas;");
+                            while($d = mysqli_fetch_array($data)){
+                              $status = $d['status'];
+                              ?>
+                              <tr>
+                                <td><center><?php echo $no++; ?></center></td>
+                                <td><left><?php echo $d['nama_petugas']; ?></center></td>
+                                 <td><center>
+                                  <?php
+                                  if($status='1'){
+                                    echo $d['status'];
+                                  }else{
+                                    echo $d['nama_petugas'];
+                                  }
+                                  ?>
+
+                                </td>
+                                <td>
+                                  <div align="center">
+                                    <a href="petugas-edit?id=<?php echo $d['id_petugas']; ?>"
+                                      <button type="button" class="btn btn-warning">Edit</a>
+                                        <a href="petugas-hapus?id=<?php echo $d['id_petugas']; ?>"
+                                         onclick="javascript: return confirm('Anda yakin hapus?')"
+                                         <button type="button" name="hapus" class="btn btn-danger">Hapus</a><br><br>
+                                         </div>
+                                       </td>
+                                       </tr><?php } ?>
+                                     </tbody>
+                                   </table>

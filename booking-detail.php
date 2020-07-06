@@ -1,4 +1,3 @@
-<?php include "readme.php";?>
 <?php include "views/header.php"; ?>
 <?php $id_booking = $_GET['id_booking'];?>
 <nav>
@@ -14,7 +13,7 @@
         <li><a href="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li class="active"><i class="fa fa-flash"></i> Detail</li>
       </ol>
-      <?php include "../notifikasi1.php"?>
+      <?php include "../../system/welcome.php"?>
     </div>
   </div><!-- /.row -->
   <div class="row">
@@ -43,7 +42,6 @@
         </div><br><br><br><!-- Row --->
         <table class="table table-bordered table-hover table-striped tablesorter">
           <?php 
-          include '../koneksi.php';
           $data = mysqli_query($koneksi,
             "SELECT *, dokter.nama_dokter, sesi.nama_sesi,
             IF (booking.status='1', 'Datang', 'Belum Datang') AS status

@@ -1,8 +1,6 @@
-<?php include "readme.php";?>
 <?php include "views/header.php"; ?>
-<?php $id_dokter = $_GET['id_dokter']; ?>
 <?php
-include '../koneksi.php';
+$id_dokter = $_GET['id_dokter'];
 $a=mysqli_query($koneksi,
   "SELECT nama_dokter
   FROM dokter
@@ -24,7 +22,7 @@ while($b = mysqli_fetch_array($a)){
         <li><a href="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li class="active"><i class="fa fa-list"></i> Dokter <?php echo $nama_dokter ?> </li>
       </ol>  
-      <?php include "../notifikasi1.php"?>
+      <?php include "../../system/welcome.php"?>
     </div>
   </div><!-- /.row -->
   <div class="row">
@@ -36,14 +34,11 @@ while($b = mysqli_fetch_array($a)){
           <ul class="dropdown-menu">
             <li disabled selected><a href="dashboard">All</a></li>
             <?php 
-            include '../koneksi.php';
-            date_default_timezone_set("Asia/Jakarta");
-            $tanggalHariIni=date('Y-m-d');
             $data = mysqli_query($koneksi,
               "SELECT *, dokter.nama_dokter
               FROM booking, dokter
               WHERE booking.id_dokter=dokter.id_dokter
-              AND booking.booking_tanggal='$tanggalHariIni'
+              AND booking.booking_tanggal='$tanggalsekarang'
               GROUP BY booking.id_dokter;");
             while($d = mysqli_fetch_array($data)){
               echo "<li><a href='booking-tab?id_dokter=".$d['id_dokter']."'>".$d['nama_dokter']."</a></li>";
@@ -67,12 +62,11 @@ while($b = mysqli_fetch_array($a)){
                     <div class="table-responsive">
                       <div align="right">
                         <?php 
-                        include '../koneksi.php';
                         $data = mysqli_query($koneksi,
                           "SELECT COUNT(*) AS total
                           FROM booking
                           WHERE booking.id_dokter='$id_dokter'
-                          AND booking.booking_tanggal='$tanggalHariIni';");
+                          AND booking.booking_tanggal='$tanggalsekarang';");
                         while($d = mysqli_fetch_array($data)){
                           ?>
                           <h1><small>Total <?php echo $d['total']; }?> Pasien</small></h1>
@@ -80,20 +74,18 @@ while($b = mysqli_fetch_array($a)){
                         <table class="table table-bordered table-hover table-striped tablesorter">
                           <thead>
                             <tr>
-                              <th><center>No</center></th>
+                              <th><center>#</center></th>
                               <th><center>No. RM</center></th>
                               <th><center>Nama Pasien</center></th>
                               <th><center>Kontak</center></th>
                               <th><center>Dokter</center></th>
                               <th><center>Sesi</center></th>
-                              <th><center>Status</center></th>
                               <th><center>Keterangan</center></th>
-                              <th><center>Action</center></th>
+                              <th colspan='2'><center>Action</center></th>
                             </tr>
                           </thead>
                           <tbody>
                             <?php 
-                            include '../koneksi.php';
                             $no = 1;
                             $data = mysqli_query($koneksi,
                               "SELECT *, dokter.nama_dokter, sesi.nama_sesi,
@@ -101,38 +93,48 @@ while($b = mysqli_fetch_array($a)){
                               FROM booking, dokter, sesi
                               WHERE booking.id_dokter=dokter.id_dokter
                               AND booking.id_sesi=sesi.id_sesi
-                              AND booking.booking_tanggal='$tanggalHariIni'
+                              AND booking.booking_tanggal='$tanggalsekarang'
                               AND booking.id_dokter='$id_dokter'
                               ORDER BY booking.id_sesi, booking.id_booking ASC;");
                             while($d = mysqli_fetch_array($data)){
-                              ?>
-                              <tr>
-                                <td><center><?php echo $no++; ?></center></td>
-                                <td><center><?php echo $d['id_catatan_medik']; ?></center></td>
-                                <td><center><?php echo $d['nama']; ?></center></td>
-                                <td><center><?php echo $d['kontak']; ?></center></td>
-                                <td><center><?php echo $d['nama_dokter']; ?></center></td>
-                                <td><center><?php echo $d['nama_sesi']; ?></center></td>
-                                <td><center><?php echo $d['status']; ?></center></td>
-                                <td><center><?php echo $d['keterangan']; ?></center></td>
-                                <td>
-                                  <div align="center">
-                                   <form method="post" action="booking-datang-proses-tab" role="form">
-                                    <input type="text" name="id_booking"
-                                    value="<?php echo $d['id_booking']; ?>" hidden>
-                                    <input type="text" name="id_dokter"
-                                    value="<?php echo $id_dokter ?>" hidden>
-                                    <button onclick="javascript: return confirm('Sudah Datang?')" 
-                                    type="submit" class="btn btn-success">Datang</button>
-                                  </form><br>
-                                  <a href="booking-detail?id_booking=<?php echo $d['id_booking']; ?>"
-                                    <button type="button" class="btn btn-warning">Detail</a><br><br>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <?php 
+                             $id_booking = $d['id_booking'];
+                             $status     = $d['status'];
+                             ?>
+                             <tr>
+                              <td><center><?php echo $no++; ?></center></td>
+                              <td><center><?php echo $d['id_catatan_medik']; ?></center></td>
+                              <td><center><?php echo $d['nama']; ?></center></td>
+                              <td><center><?php echo $d['kontak']; ?></center></td>
+                              <td><center><?php echo $d['nama_dokter']; ?></center></td>
+                              <td><center><?php echo $d['nama_sesi']; ?></center></td>
+                              <td><center><?php echo $d['keterangan']; ?></center></td>
+                              <td><center><?php
+                              if($status=='Datang'){
+                                echo "<form method='post' action='booking-belum-datang-proses-tab' role='form'>
+                                <input type='text' name='id_booking'
+                                value='$id_booking;' hidden>
+                                <input type='text' name='id_dokter'
+                                value='$id_dokter' hidden>
+                                <button type='submit' class='btn btn-success'><i class='fa fa-check'></i></button>
+                                </form>";
+                              }else{
+                                echo "<form method='post' action='booking-datang-proses-tab' role='form'>
+                                <input type='text' name='id_booking'
+                                value='$id_booking;' hidden>
+                                <input type='text' name='id_dokter'
+                                value='$id_dokter' hidden>
+                                <button type='submit' class='btn btn-danger'><i class='fa fa-times'></i></button>
+                                </form>";
                               }
                               ?>
+                            </center></td>
+                            <td>
+                              <div align="center">
+                                <a href="booking-detail?id_booking=<?php echo $d['id_booking']; ?>"
+                                  <button type="button" class="btn btn-warning"><i class='fa fa-folder-open-o'></i></button></a>
+                                </div>
+                              </td>
+                              </tr><?php } ?>
                             </tbody>
                           </table>
                         </div>
@@ -145,13 +147,12 @@ while($b = mysqli_fetch_array($a)){
                         <div class="table-responsive">
                           <div align="right" class="col-lg-12">
                             <?php 
-                            include '../koneksi.php';
                             $data = mysqli_query($koneksi,
                               "SELECT COUNT(*) AS total
                               FROM booking
                               WHERE booking.id_dokter='$id_dokter'
                               AND booking.id_sesi='1'
-                              AND booking.booking_tanggal='$tanggalHariIni';");
+                              AND booking.booking_tanggal='$tanggalsekarang';");
                             while($d = mysqli_fetch_array($data)){
                               ?>
                               <h1><small>Total <?php echo $d['total']; }?> Pasien</small></h1>
@@ -159,20 +160,18 @@ while($b = mysqli_fetch_array($a)){
                             <table class="table table-bordered table-hover table-striped tablesorter">
                               <thead>
                                 <tr>
-                                  <th><center>No</center></th>
+                                  <th><center>#</center></th>
                                   <th><center>No. RM</center></th>
                                   <th><center>Nama Pasien</center></th>
                                   <th><center>Kontak</center></th>
                                   <th><center>Dokter</center></th>
                                   <th><center>Sesi</center></th>
-                                  <th><center>Status</center></th>
                                   <th><center>Keterangan</center></th>
-                                  <th><center>Action</center></th>
+                                  <th colspan='2'><center>Action</center></th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <?php 
-                                include '../koneksi.php';
                                 $no = 1;
                                 $data = mysqli_query($koneksi,
                                   "SELECT *, dokter.nama_dokter, sesi.nama_sesi,
@@ -180,11 +179,13 @@ while($b = mysqli_fetch_array($a)){
                                   FROM booking, dokter, sesi
                                   WHERE booking.id_dokter=dokter.id_dokter
                                   AND booking.id_sesi=sesi.id_sesi
-                                  AND booking.booking_tanggal='$tanggalHariIni'
+                                  AND booking.booking_tanggal='$tanggalsekarang'
                                   AND booking.id_dokter='$id_dokter'
                                   AND booking.id_sesi='1'
                                   ORDER BY booking.id_sesi, booking.id_booking ASC;");
                                 while($d = mysqli_fetch_array($data)){
+                                  $id_booking = $d['id_booking'];
+                                  $status     = $d['status'];
                                   ?>
                                   <tr>
                                     <td><center><?php echo $no++; ?></center></td>
@@ -193,26 +194,34 @@ while($b = mysqli_fetch_array($a)){
                                     <td><center><?php echo $d['kontak']; ?></center></td>
                                     <td><center><?php echo $d['nama_dokter']; ?></center></td>
                                     <td><center><?php echo $d['nama_sesi']; ?></center></td>
-                                    <td><center><?php echo $d['status']; ?></center></td>
                                     <td><center><?php echo $d['keterangan']; ?></center></td>
-                                    <td>
-                                      <div align="center">
-                                        <form method="post" action="booking-datang-proses-tab" role="form">
-                                          <input type="text" name="id_booking"
-                                          value="<?php echo $d['id_booking']; ?>" hidden>
-                                          <input type="text" name="id_dokter"
-                                          value="<?php echo $id_dokter ?>" hidden>
-                                          <button onclick="javascript: return confirm('Sudah Datang?')" 
-                                          type="submit" class="btn btn-success">Datang</button>
-                                        </form><br>
-                                        <a href="booking-detail?id_booking=<?php echo $d['id_booking']; ?>"
-                                          <button type="button" class="btn btn-warning">Detail</a><br><br>
-                                          </div>
-                                        </td>
-                                      </tr>
-                                      <?php 
+                                    <td><center><?php
+                                    if($status=='Datang'){
+                                      echo "<form method='post' action='booking-belum-datang-proses-tab' role='form'>
+                                      <input type='text' name='id_booking'
+                                      value='$id_booking;' hidden>
+                                      <input type='text' name='id_dokter'
+                                      value='$id_dokter' hidden>
+                                      <button type='submit' class='btn btn-success'><i class='fa fa-check'></i></button>
+                                      </form>";
+                                    }else{
+                                      echo "<form method='post' action='booking-datang-proses-tab' role='form'>
+                                      <input type='text' name='id_booking'
+                                      value='$id_booking;' hidden>
+                                      <input type='text' name='id_dokter'
+                                      value='$id_dokter' hidden>
+                                      <button type='submit' class='btn btn-danger'><i class='fa fa-times'></i></button>
+                                      </form>";
                                     }
                                     ?>
+                                  </center></td>
+                                  <td>
+                                    <div align="center">
+                                      <a href="booking-detail?id_booking=<?php echo $d['id_booking']; ?>"
+                                        <button type="button" class="btn btn-warning"><i class='fa fa-folder-open-o'></i></button></a>
+                                      </div>
+                                    </td>
+                                    </tr><?php } ?>
                                   </tbody>
                                 </table>
                               </div>
@@ -225,13 +234,12 @@ while($b = mysqli_fetch_array($a)){
                               <div class="table-responsive">
                                <div align="right" class="col-lg-12">
                                 <?php 
-                                include '../koneksi.php';
                                 $data = mysqli_query($koneksi,
                                   "SELECT COUNT(*) AS total
                                   FROM booking
                                   WHERE booking.id_dokter='$id_dokter'
                                   AND booking.id_sesi='2'
-                                  AND booking.booking_tanggal='$tanggalHariIni';");
+                                  AND booking.booking_tanggal='$tanggalsekarang';");
                                 while($d = mysqli_fetch_array($data)){
                                   ?>
                                   <h1><small>Total <?php echo $d['total']; }?> Pasien</small></h1>
@@ -239,20 +247,18 @@ while($b = mysqli_fetch_array($a)){
                                 <table class="table table-bordered table-hover table-striped tablesorter">
                                   <thead>
                                     <tr>
-                                      <th><center>No</center></th>
+                                      <th><center>#</center></th>
                                       <th><center>No. RM</center></th>
                                       <th><center>Nama Pasien</center></th>
                                       <th><center>Kontak</center></th>
                                       <th><center>Dokter</center></th>
                                       <th><center>Sesi</center></th>
-                                      <th><center>Status</center></th>
                                       <th><center>Keterangan</center></th>
-                                      <th><center>Action</center></th>
+                                      <th colspan='2'><center>Action</center></th>
                                     </tr>
                                   </thead>
                                   <tbody>
                                     <?php 
-                                    include '../koneksi.php';
                                     $no = 1;
                                     $data = mysqli_query($koneksi,
                                       "SELECT *, dokter.nama_dokter, sesi.nama_sesi,
@@ -260,11 +266,13 @@ while($b = mysqli_fetch_array($a)){
                                       FROM booking, dokter, sesi
                                       WHERE booking.id_dokter=dokter.id_dokter
                                       AND booking.id_sesi=sesi.id_sesi
-                                      AND booking.booking_tanggal='$tanggalHariIni'
+                                      AND booking.booking_tanggal='$tanggalsekarang'
                                       AND booking.id_dokter='$id_dokter'
                                       AND booking.id_sesi='2'
                                       ORDER BY booking.id_sesi, booking.id_booking ASC;");
                                     while($d = mysqli_fetch_array($data)){
+                                      $id_booking = $d['id_booking'];
+                                      $status     = $d['status'];
                                       ?>
                                       <tr>
                                         <td><center><?php echo $no++; ?></center></td>
@@ -273,26 +281,34 @@ while($b = mysqli_fetch_array($a)){
                                         <td><center><?php echo $d['kontak']; ?></center></td>
                                         <td><center><?php echo $d['nama_dokter']; ?></center></td>
                                         <td><center><?php echo $d['nama_sesi']; ?></center></td>
-                                        <td><center><?php echo $d['status']; ?></center></td>
                                         <td><center><?php echo $d['keterangan']; ?></center></td>
-                                        <td>
-                                          <div align="center">
-                                            <form method="post" action="booking-datang-proses-tab" role="form">
-                                              <input type="text" name="id_booking"
-                                              value="<?php echo $d['id_booking']; ?>" hidden>
-                                              <input type="text" name="id_dokter"
-                                              value="<?php echo $id_dokter ?>" hidden>
-                                              <button onclick="javascript: return confirm('Sudah Datang?')" 
-                                              type="submit" class="btn btn-success">Datang</button>
-                                            </form><br>
-                                            <a href="booking-detail?id_booking=<?php echo $d['id_booking']; ?>"
-                                              <button type="button" class="btn btn-warning">Detail</a><br><br>
-                                              </div>
-                                            </td>
-                                          </tr>
-                                          <?php 
+                                        <td><center><?php
+                                        if($status=='Datang'){
+                                          echo "<form method='post' action='booking-belum-datang-proses-tab' role='form'>
+                                          <input type='text' name='id_booking'
+                                          value='$id_booking;' hidden>
+                                          <input type='text' name='id_dokter'
+                                          value='$id_dokter' hidden>
+                                          <button type='submit' class='btn btn-success'><i class='fa fa-check'></i></button>
+                                          </form>";
+                                        }else{
+                                          echo "<form method='post' action='booking-datang-proses-tab' role='form'>
+                                          <input type='text' name='id_booking'
+                                          value='$id_booking;' hidden>
+                                          <input type='text' name='id_dokter'
+                                          value='$id_dokter' hidden>
+                                          <button type='submit' class='btn btn-danger'><i class='fa fa-times'></i></button>
+                                          </form>";
                                         }
                                         ?>
+                                      </center></td>
+                                      <td>
+                                        <div align="center">
+                                          <a href="booking-detail?id_booking=<?php echo $d['id_booking']; ?>"
+                                            <button type="button" class="btn btn-warning"><i class='fa fa-folder-open-o'></i></button></a>
+                                          </div>
+                                        </td>
+                                        </tr><?php } ?>
                                       </tbody>
                                     </table>
                                   </div>
@@ -305,13 +321,12 @@ while($b = mysqli_fetch_array($a)){
                                   <div class="table-responsive">
                                    <div align="right" class="col-lg-12">
                                     <?php 
-                                    include '../koneksi.php';
                                     $data = mysqli_query($koneksi,
                                       "SELECT COUNT(*) AS total
                                       FROM booking
                                       WHERE booking.id_dokter='$id_dokter'
                                       AND booking.id_sesi='3'
-                                      AND booking.booking_tanggal='$tanggalHariIni';");
+                                      AND booking.booking_tanggal='$tanggalsekarang';");
                                     while($d = mysqli_fetch_array($data)){
                                       ?>
                                       <h1><small>Total <?php echo $d['total']; }?> Pasien</small></h1>
@@ -319,20 +334,18 @@ while($b = mysqli_fetch_array($a)){
                                     <table class="table table-bordered table-hover table-striped tablesorter">
                                       <thead>
                                         <tr>
-                                          <th><center>No</center></th>
+                                          <th><center>#</center></th>
                                           <th><center>No. RM</center></th>
                                           <th><center>Nama Pasien</center></th>
                                           <th><center>Kontak</center></th>
                                           <th><center>Dokter</center></th>
                                           <th><center>Sesi</center></th>
-                                          <th><center>Status</center></th>
                                           <th><center>Keterangan</center></th>
-                                          <th><center>Action</center></th>
+                                          <th colspan='2'><center>Action</center></th>
                                         </tr>
                                       </thead>
                                       <tbody>
                                         <?php 
-                                        include '../koneksi.php';
                                         $no = 1;
                                         $data = mysqli_query($koneksi,
                                           "SELECT *, dokter.nama_dokter, sesi.nama_sesi,
@@ -340,11 +353,13 @@ while($b = mysqli_fetch_array($a)){
                                           FROM booking, dokter, sesi
                                           WHERE booking.id_dokter=dokter.id_dokter
                                           AND booking.id_sesi=sesi.id_sesi
-                                          AND booking.booking_tanggal='$tanggalHariIni'
+                                          AND booking.booking_tanggal='$tanggalsekarang'
                                           AND booking.id_dokter='$id_dokter'
                                           AND booking.id_sesi='3'
                                           ORDER BY booking.id_sesi, booking.id_booking ASC;");
                                         while($d = mysqli_fetch_array($data)){
+                                          $id_booking = $d['id_booking'];
+                                          $status     = $d['status'];
                                           ?>
                                           <tr>
                                             <td><center><?php echo $no++; ?></center></td>
@@ -353,26 +368,34 @@ while($b = mysqli_fetch_array($a)){
                                             <td><center><?php echo $d['kontak']; ?></center></td>
                                             <td><center><?php echo $d['nama_dokter']; ?></center></td>
                                             <td><center><?php echo $d['nama_sesi']; ?></center></td>
-                                            <td><center><?php echo $d['status']; ?></center></td>
                                             <td><center><?php echo $d['keterangan']; ?></center></td>
-                                            <td>
-                                              <div align="center">
-                                                <form method="post" action="booking-datang-proses-tab" role="form">
-                                                  <input type="text" name="id_booking"
-                                                  value="<?php echo $d['id_booking']; ?>" hidden>
-                                                  <input type="text" name="id_dokter"
-                                                  value="<?php echo $id_dokter ?>" hidden>
-                                                  <button onclick="javascript: return confirm('Sudah Datang?')" 
-                                                  type="submit" class="btn btn-success">Datang</button>
-                                                </form><br>
-                                                <a href="booking-detail?id_booking=<?php echo $d['id_booking']; ?>"
-                                                  <button type="button" class="btn btn-warning">Detail</a><br><br>
-                                                  </div>
-                                                </td>
-                                              </tr>
-                                              <?php 
+                                            <td><center><?php
+                                            if($status=='Datang'){
+                                              echo "<form method='post' action='booking-belum-datang-proses-tab' role='form'>
+                                              <input type='text' name='id_booking'
+                                              value='$id_booking;' hidden>
+                                              <input type='text' name='id_dokter'
+                                              value='$id_dokter' hidden>
+                                              <button type='submit' class='btn btn-success'><i class='fa fa-check'></i></button>
+                                              </form>";
+                                            }else{
+                                              echo "<form method='post' action='booking-datang-proses-tab' role='form'>
+                                              <input type='text' name='id_booking'
+                                              value='$id_booking;' hidden>
+                                              <input type='text' name='id_dokter'
+                                              value='$id_dokter' hidden>
+                                              <button type='submit' class='btn btn-danger'><i class='fa fa-times'></i></button>
+                                              </form>";
                                             }
                                             ?>
+                                          </center></td>
+                                          <td>
+                                            <div align="center">
+                                              <a href="booking-detail?id_booking=<?php echo $d['id_booking']; ?>"
+                                                <button type="button" class="btn btn-warning"><i class='fa fa-folder-open-o'></i></button></a>
+                                              </div>
+                                            </td>
+                                            </tr><?php } ?>
                                           </tbody>
                                         </table>
                                       </div>
@@ -385,13 +408,12 @@ while($b = mysqli_fetch_array($a)){
                                       <div class="table-responsive">
                                        <div align="right" class="col-lg-12">
                                         <?php 
-                                        include '../koneksi.php';
                                         $data = mysqli_query($koneksi,
                                           "SELECT COUNT(*) AS total
                                           FROM booking
                                           WHERE booking.id_dokter='$id_dokter'
                                           AND booking.id_sesi='4'
-                                          AND booking.booking_tanggal='$tanggalHariIni';");
+                                          AND booking.booking_tanggal='$tanggalsekarang';");
                                         while($d = mysqli_fetch_array($data)){
                                           ?>
                                           <h1><small>Total <?php echo $d['total']; }?> Pasien</small></h1>
@@ -399,20 +421,18 @@ while($b = mysqli_fetch_array($a)){
                                         <table class="table table-bordered table-hover table-striped tablesorter">
                                           <thead>
                                             <tr>
-                                              <th><center>No</center></th>
+                                              <th><center>#</center></th>
                                               <th><center>No. RM</center></th>
                                               <th><center>Nama Pasien</center></th>
                                               <th><center>Kontak</center></th>
                                               <th><center>Dokter</center></th>
                                               <th><center>Sesi</center></th>
-                                              <th><center>Status</center></center></th>
                                               <th><center>Keterangan</center></th>
-                                              <th><center>Action</center></th>
+                                              <th colspan='2'><center>Action</center></th>
                                             </tr>
                                           </thead>
                                           <tbody>
                                             <?php 
-                                            include '../koneksi.php';
                                             $no = 1;
                                             $data = mysqli_query($koneksi,
                                               "SELECT *, dokter.nama_dokter, sesi.nama_sesi,
@@ -420,11 +440,13 @@ while($b = mysqli_fetch_array($a)){
                                               FROM booking, dokter, sesi
                                               WHERE booking.id_dokter=dokter.id_dokter
                                               AND booking.id_sesi=sesi.id_sesi
-                                              AND booking.booking_tanggal='$tanggalHariIni'
+                                              AND booking.booking_tanggal='$tanggalsekarang'
                                               AND booking.id_dokter='$id_dokter'
                                               AND booking.id_sesi='4'
                                               ORDER BY booking.id_sesi, booking.id_booking ASC;");
                                             while($d = mysqli_fetch_array($data)){
+                                              $id_booking = $d['id_booking'];
+                                              $status     = $d['status'];
                                               ?>
                                               <tr>
                                                 <td><center><?php echo $no++; ?></center></td>
@@ -433,26 +455,34 @@ while($b = mysqli_fetch_array($a)){
                                                 <td><center><?php echo $d['kontak']; ?></td></center>
                                                 <td><center><?php echo $d['nama_dokter']; ?></center></td>
                                                 <td><center><?php echo $d['nama_sesi']; ?></center></td>
-                                                <td><center><?php echo $d['status']; ?></center></td>
                                                 <td><center><?php echo $d['keterangan']; ?></center></td>
-                                                <td>
-                                                  <div align="center">
-                                                    <form method="post" action="booking-datang-proses-tab" role="form">
-                                                      <input type="text" name="id_booking"
-                                                      value="<?php echo $d['id_booking']; ?>" hidden>
-                                                      <input type="text" name="id_dokter"
-                                                      value="<?php echo $id_dokter ?>" hidden>
-                                                      <button onclick="javascript: return confirm('Sudah Datang?')" 
-                                                      type="submit" class="btn btn-success">Datang</button>
-                                                    </form><br>
-                                                    <a href="booking-detail?id_booking=<?php echo $d['id_booking']; ?>"
-                                                      <button type="button" class="btn btn-warning">Detail</a><br><br>
-                                                      </div>
-                                                    </td>
-                                                  </tr>
-                                                  <?php 
+                                                <td><center><?php
+                                                if($status=='Datang'){
+                                                  echo "<form method='post' action='booking-belum-datang-proses-tab' role='form'>
+                                                  <input type='text' name='id_booking'
+                                                  value='$id_booking;' hidden>
+                                                  <input type='text' name='id_dokter'
+                                                  value='$id_dokter' hidden>
+                                                  <button type='submit' class='btn btn-success'><i class='fa fa-check'></i></button>
+                                                  </form>";
+                                                }else{
+                                                  echo "<form method='post' action='booking-datang-proses-tab' role='form'>
+                                                  <input type='text' name='id_booking'
+                                                  value='$id_booking;' hidden>
+                                                  <input type='text' name='id_dokter'
+                                                  value='$id_dokter' hidden>
+                                                  <button type='submit' class='btn btn-danger'><i class='fa fa-times'></i></button>
+                                                  </form>";
                                                 }
                                                 ?>
+                                              </center></td>
+                                              <td>
+                                                <div align="center">
+                                                  <a href="booking-detail?id_booking=<?php echo $d['id_booking']; ?>"
+                                                    <button type="button" class="btn btn-warning"><i class='fa fa-folder-open-o'></i></button></a>
+                                                  </div>
+                                                </td>
+                                                </tr><?php } ?>
                                               </tbody>
                                             </table>
                                           </div>

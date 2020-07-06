@@ -1,4 +1,3 @@
-<?php include "readme.php";?>
 <!-- Sidebar -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
@@ -37,7 +36,7 @@
           <li><a href="dokter-tambah"><i class="fa fa-user-md"></i> Dokter</a></li>
           <li><a href="jadwal-dokter"><i class="fa fa-calendar"></i> Jadwal</a></li>
           <li><a href="laporan-per-dokter"><i class="fa fa-search"></i> Pencarian</a></li>
-          <li><a href="../dokumentasi-tampil?id_buku=50">
+          <li><a href="../../system/tutorial?id_buku=50">
             <i class="fa fa-file"></i> Dokumentasi</a>
           </li>
           <li>

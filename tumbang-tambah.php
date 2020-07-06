@@ -1,4 +1,3 @@
-<?php include "readme.php";?>
 <?php 
 include "views/header.php";
 $m = 31;
@@ -37,7 +36,7 @@ function format_mak($mak)
         <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li class="active"><i class="fa fa-plus"></i> Tambah</li>
       </ol>
-      <?php include "../notifikasi1.php"?>
+      <?php include "../../system/welcome.php"?>
       <div class="alert alert-warning alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <font size='3'>Registrasi maksimal sampai tanggal <b><?php echo format_mak($mak);?></font></b>
@@ -65,11 +64,6 @@ function format_mak($mak)
       <div class="col-lg-6">
         <?php
         if(isset($_POST['tumbangsubmit'])){
-          include '../koneksi.php';
-          date_default_timezone_set("Asia/Jakarta");
-          $tanggal=date('Y-m-d');
-          $jam=date("h:i:sa");
-                // menangkap data yang di kirim dari form
           $id_catatan_medik = '0';
           $nama             = $_POST['nama'];
           $alamat           = $_POST['alamat'];
@@ -77,16 +71,15 @@ function format_mak($mak)
           $id_petugas       = $_POST['id_petugas'];
           $jadwal           = $_POST['jadwal'];
           $id_sesi          = $_POST['id_sesi'];
-          $tanggal          = $tanggal;
-          $jam              = $jam;
+          $tanggal          = $tanggalsekarang;
+          $jam              = $jamsekarang;
           $status           = '0';
           $keterangan       = $_POST['keterangan'];
-                // cek selisih hari
-          $tglsekarang  = new DateTime();
-          $cekjadwal     = new DateTime("$jadwal");
-          $hasil      = $tglsekarang->diff($cekjadwal)->format("%a");
-          $selisih    = $hasil;
-                // cek antrian
+          $tglsekarang      = new DateTime();
+          $cekjadwal        = new DateTime("$jadwal");
+          $hasil            = $tglsekarang->diff($cekjadwal)->format("%a");
+          $selisih          = $hasil;
+
           $a = mysqli_query($koneksi,
             "SELECT COUNT(*) AS antrian
             FROM tumbang
@@ -167,7 +160,6 @@ function format_mak($mak)
                           <p style="color:red;"><?php echo ($error['id_petugas']) ? $error['id_petugas'] : ''; ?></p>
                           <option disabled selected>Pilih</option>
                           <?php 
-                          include '../koneksi.php';
                           $data = mysqli_query($koneksi,
                             "SELECT * FROM tumbang_petugas WHERE status=1;");
                           while($d = mysqli_fetch_array($data)){
@@ -188,7 +180,6 @@ function format_mak($mak)
                           <p style="color:red;"><?php echo ($error['id_sesi']) ? $error['id_sesi'] : ''; ?></p>
                           <option disabled selected>Pilih</option>
                           <?php 
-                          include '../koneksi.php';
                           $data = mysqli_query($koneksi,
                             "SELECT * FROM sesi;");
                           while($d = mysqli_fetch_array($data)){

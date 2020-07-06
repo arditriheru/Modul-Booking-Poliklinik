@@ -1,4 +1,3 @@
-<?php include "readme.php";?>
 <?php include "views/header.php"; ?>
 <?php  $id_booking = $_GET['id_booking']; ?>
 <nav>
@@ -15,7 +14,7 @@
         <li><a href="booking-detail?id_booking=<?php echo $id_booking?>"><i class="fa fa-eye"></i> Detail</a></li>
         <li class="active"><i class="fa fa-edit"></i> Form</li>
       </ol>
-      <?php include "../notifikasi1.php"?>
+      <?php include "../../system/welcome.php"?>
       <div class="alert alert-danger alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <font size='3'>Jika pasien melakukan perubahan jadwal, hapus jadwal sebelumnya dan tambahkan jadwal baru!</font>
@@ -23,7 +22,6 @@
     </div>
   </div><!-- /.row -->
   <?php 
-  include '../koneksi.php';
   $data = mysqli_query($koneksi,
     "SELECT *, dokter.nama_dokter, sesi.nama_sesi
     FROM booking, dokter, sesi
@@ -53,10 +51,7 @@
     ?>
     <?php
     if(isset($_POST['submit'])){
-            // koneksi database
-      include '../koneksi.php';
       $id_booking = $_GET['id_booking'];
-            // menangkap data yang di kirim dari form
       $id_catatan_medik = $_POST['id_catatan_medik'];
       $nama             = $_POST['nama'];
       $alamat           = $_POST['alamat'];
@@ -65,11 +60,10 @@
       $booking_tanggal  = $_POST['booking_tanggal'];
       $id_sesi          = $_POST['id_sesi'];
       $keterangan       = $_POST['keterangan'];
-            // menginput data ke database
+
       $edit=mysqli_query($koneksi,"UPDATE booking SET nama='$nama',alamat='$alamat',kontak='$kontak',
         keterangan='$keterangan'
         WHERE id_booking='$id_booking'");
-            // mengalihkan halaman kembali ke index.php
       if($edit){
         echo "<script>alert('Berhasil Mengubah!!!');
         document.location='booking-detail?id_booking=$id_booking'</script>";

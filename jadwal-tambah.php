@@ -1,4 +1,3 @@
-<?php include "readme.php";?>
 <?php include "views/header.php"; ?>
 <nav>
   <div id="wrapper">
@@ -13,18 +12,11 @@
         <li><a href="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li class="active"><i class="fa fa-calendar"></i> Jadwal</li>
       </ol>
-      <?php include "../notifikasi1.php"?>
+      <?php include "../../system/welcome.php"?>
     </div>
   </div><!-- /.row -->
   <?php
   if(isset($_POST['submit'])){
-    session_start();
-            // koneksi database
-    include '../koneksi.php';
-            // menangkap data yang di kirim dari form
-    date_default_timezone_set("Asia/Jakarta");
-    $_SESSION['tanggal'] = date('Y-m-d');
-    $_SESSION['jam']     = date('h:i:s');
     $id_dokter  = $_POST['id_dokter'];
     $senin      = $_POST['senin'];
     $selasa     = $_POST['selasa'];
@@ -34,10 +26,9 @@
     $sabtu      = $_POST['sabtu'];
     $minggu     = $_POST['minggu'];
     $sp         = $_GET['sp'];
-            // menginput data ke database
+
     $tambah=mysqli_query($koneksi,"INSERT INTO jadwal (id_jadwal, id_dokter, sen, sel, rab, kam, jum, sab, min, sp)
       VALUES('','$id_dokter','$senin','$selasa','$rabu','$kamis','$jumat','$sabtu','$minggu','$sp')");
-            // mengalihkan halaman
     if($tambah){
       echo "<script>alert('Berhasil Menambah Jadwal!!!');
       document.location='jadwal-dokter'</script>";

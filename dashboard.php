@@ -1,4 +1,3 @@
-<?php include "readme.php";?>
 <?php include "views/header.php"; ?>
 <nav>
   <div id="wrapper">
@@ -12,7 +11,7 @@
       <ol class="breadcrumb">
         <li class="active"><i class="fa fa-dashboard"></i> Dashboard</li>
       </ol>  
-      <?php include "../notifikasi1.php"?>
+      <?php include "../../system/welcome.php"?>
     </div>
   </div><!-- /.row -->
   <?php include "booking-tampil.php"; ?>

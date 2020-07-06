@@ -1,4 +1,3 @@
-<?php include "readme.php";?>
 <?php include "views/header.php"; ?>
 <nav>
   <div id="wrapper">
@@ -14,7 +13,7 @@
         <li><a href="booking-tambah"><i class="fa fa-pencil"></i> Tambah</a></li>
         <li class="active"><i class="fa fa-search"></i> Cari</li>
       </ol>
-      <?php include "../notifikasi1.php"?>
+      <?php include "../../system/welcome.php"?>
     </div>
   </div><!-- /.row -->
   <div class="row">
@@ -33,7 +32,6 @@
                       </thead>
                       <tbody>
                         <?php 
-                        include '../koneksi.php';
                         $no = 1;
                         $nama = $_POST['nama'];
                         $data = mysqli_query($koneksi,
@@ -68,6 +66,5 @@
                                 </div>
                               </div>
                             </div><!-- /.row -->
-                          </div><br><br><?php include "../copyright.php";?><br><br><!-- /#page-wrapper -->
                         </div><!-- /#wrapper -->
                         <?php include "views/footer.php"; ?>

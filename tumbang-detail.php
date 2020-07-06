@@ -1,6 +1,4 @@
-<?php include "readme.php";?>
 <?php include "views/header.php"; ?>
-<?php $id_tumbang = $_GET['id_tumbang'];?>
 <nav>
   <div id="wrapper">
     <?php include "menu.php"; ?>
@@ -14,13 +12,14 @@
         <li><a href="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li class="active"><i class="fa fa-flash"></i> Detail</li>
       </ol>
-      <?php include "../notifikasi1.php"?>
+      <?php include "../../system/welcome.php"?>
     </div>
   </div><!-- /.row -->
   <div class="row">
     <div class="col-lg-12">
       <div class="table-responsive">
         <div clas="row">
+          <?php $id_tumbang = $_GET['id_tumbang']; ?>
           <div class="col-lg-6">
             <a href="tumbang-datang-proses?id_tumbang=<?php echo $id_tumbang; ?>"
               <button onclick="javascript: return confirm('Sudah Datang?')"
@@ -43,7 +42,6 @@
         </div><br><br><br><!-- Row --->
         <table class="table table-bordered table-hover table-striped tablesorter">
           <?php 
-          include '../koneksi.php';
           $data = mysqli_query($koneksi,
             "SELECT *, tumbang_petugas.nama_petugas, sesi.nama_sesi,
             IF (tumbang.status='1', 'Datang', 'Belum Datang') AS status
@@ -140,6 +138,5 @@
       </div>
     </div>
   </div><!-- /.row -->
-</div><?php include "../copyright.php";?><br><br><!-- /#page-wrapper -->
 </div><!-- /#wrapper -->
 <?php include "views/footer.php"; ?>

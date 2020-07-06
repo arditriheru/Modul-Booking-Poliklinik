@@ -1,6 +1,5 @@
-<?php include "readme.php";?>
 <?php include "views/header.php"; ?>
-<?php  $id_dokter = $_GET['id']; ?>
+<?php   ?>
 <nav>
   <div id="wrapper">
     <?php include "menu.php"; ?>   
@@ -14,13 +13,13 @@
         <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li class="active"><i class="fa fa-pencil"></i> Edit</li>
       </ol>
-      <?php include "../notifikasi1.php"?>
+     <?php include "../../system/welcome.php"?>
     </div>
   </div><!-- /.row -->
   <div class="row">
     <div class="col-lg-6">
       <?php 
-      include '../koneksi.php';
+      $id_dokter = $_GET['id'];
       $data = mysqli_query($koneksi,
         "SELECT nama_dokter, kuota FROM dokter WHERE id_dokter='$id_dokter';");
       while($d = mysqli_fetch_array($data)){
@@ -30,8 +29,6 @@
       ?>
       <?php
       if(isset($_POST['submit'])){
-        include '../koneksi.php';
-
         $for_query = '';
         if(!empty($_POST["kuota_hari"])){
           foreach($_POST["kuota_hari"] AS $kuota_hari){
@@ -174,7 +171,6 @@
           <select class="form-control" type="text" name="kuota_status">
             <p style="color:red;"><?php echo ($error['kuota_status']) ? $error['kuota_status'] : ''; ?></p>
             <?php 
-            include '../koneksi.php';
             $data = mysqli_query($koneksi,
               "SELECT kuota_status, IF(kuota_status='1', 'Aktif', 'Nonaktif') AS nama_kuota_status
               FROM dokter WHERE id_dokter='$id_dokter';");

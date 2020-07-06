@@ -1,11 +1,23 @@
-<?php include "readme.php";?>
 <?php
+header("Content-type: application/ms-excel");
+header("Content-Disposition: attachment; filename=list-pasien-".date('d-m-Y').".xls");
+
+include '../../config/connect.php';
 $id_dokter  = $_POST['id_dokter'];
 $awal       = $_POST['awal'];
 $akhir      = $_POST['akhir'];
 $id_sesi    = $_POST['id_sesi'];
-header("Content-type: application/ms-excel");
-header("Content-Disposition: attachment; filename=list-pasien-".date('d-m-Y').".xls");
+$title = mysqli_query($koneksi,
+    "SELECT *, dokter.nama_dokter, sesi.nama_sesi
+    FROM booking, dokter, sesi
+    WHERE booking.id_dokter=dokter.id_dokter
+    AND booking.id_sesi=sesi.id_sesi
+    AND booking.id_sesi = '$id_sesi'
+    AND booking.id_dokter='$id_dokter';");
+while($value = mysqli_fetch_array($title)){
+    $nama_dokter    = $value['nama_dokter'];
+    $nama_sesi      = $value['nama_sesi'];
+}
 
 function format_awal($awal)
 {
@@ -43,19 +55,6 @@ function format_akhir($akhir)
     $split = explode('-', $akhir);
     return $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
 }
-
-include '../koneksi.php';
-$title = mysqli_query($koneksi,
-    "SELECT *, dokter.nama_dokter, sesi.nama_sesi
-    FROM booking, dokter, sesi
-    WHERE booking.id_dokter=dokter.id_dokter
-    AND booking.id_sesi=sesi.id_sesi
-    AND booking.id_sesi = '$id_sesi'
-    AND booking.id_dokter='$id_dokter';");
-while($value = mysqli_fetch_array($title)){
-    $nama_dokter    = $value['nama_dokter'];
-    $nama_sesi      = $value['nama_sesi'];
-}
 ?>
 <html>
 <body>
@@ -70,11 +69,8 @@ while($value = mysqli_fetch_array($title)){
                     <th><center>Nomor RM</th>
                         <th><center>Nama Pasien</th>
                         </tr>
-                        <?php 
-                        include '../koneksi.php';
-                        $no = 1;
-                        date_default_timezone_set("Asia/Jakarta");
-                        $tanggalHariIni=date('Y-m-d');
+                        <?php
+                        $no=1;
                         $data = mysqli_query($koneksi,
                             "SELECT *, dokter.nama_dokter, sesi.nama_sesi,
                             IF (booking.status='1', 'Datang', 'Belum Datang') AS status

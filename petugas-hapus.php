@@ -1,6 +1,5 @@
-<?php include "readme.php";?>
 <?php 
-include '../koneksi.php';
+include '../../config/connect.php';
 $id_petugas = $_GET['id'];
 $hapus=mysqli_query($koneksi,"DELETE FROM tumbang_petugas WHERE id_petugas='$id_petugas'");
 if($hapus){

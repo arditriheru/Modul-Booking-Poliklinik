@@ -1,4 +1,3 @@
-<?php include "readme.php";?>
 <?php 
 include "views/header.php";
 $m = 31;
@@ -37,7 +36,7 @@ function format_mak($mak)
         <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li class="active"><i class="fa fa-plus"></i> Tambah</li>
       </ol>
-      <?php include "../notifikasi1.php"?>
+      <?php include "../../system/welcome.php"?>
       <div class="alert alert-warning alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <font size='3'>Registrasi maksimal sampai tanggal <b><?php echo format_mak($mak);?></font></b>
@@ -65,11 +64,6 @@ function format_mak($mak)
       <div class="col-lg-6">
         <?php
         if(isset($_POST['polisubmit'])){
-          include '../koneksi.php';
-          date_default_timezone_set("Asia/Jakarta");
-          $tanggal=date('Y-m-d');
-          $jam=date("h:i:sa");
-                // menangkap data yang di kirim dari form
           $id_catatan_medik = $_POST['id_catatan_medik'];
           $nama             = $_POST['nama'];
           $alamat           = $_POST['alamat'];
@@ -77,14 +71,13 @@ function format_mak($mak)
           $id_dokter        = $_POST['id_dokter'];
           $booking_tanggal  = $_POST['booking_tanggal'];
           $id_sesi          = $_POST['id_sesi'];
-          $tanggal          = $tanggal;
-          $jam              = $jam;
+          $tanggal          = $tanggalsekarang;
+          $jam              = $jamsekarang;
           $status           = '2';
           $keterangan       = $_POST['keterangan'];
-
-          $tglsekarang  = new DateTime();
-          $jadwal     = new DateTime("$booking_tanggal");
-          $selisih      = $tglsekarang->diff($jadwal)->format("%a");
+          $tglsekarang      = new DateTime();
+          $jadwal           = new DateTime("$booking_tanggal");
+          $selisih          = $tglsekarang->diff($jadwal)->format("%a");
                 // cek antrian
           $a = mysqli_query($koneksi,
             "SELECT COUNT(*) AS antrian

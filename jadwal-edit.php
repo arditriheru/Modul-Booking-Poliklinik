@@ -1,6 +1,4 @@
-<?php include "readme.php";?>
 <?php include "views/header.php"; ?>
-<?php $id_jadwal = $_GET['id_jadwal']; ?>
 <nav>
   <div id="wrapper">
     <?php include "menu.php"; ?>   
@@ -14,8 +12,9 @@
         <li><a href="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li class="active"><i class="fa fa-calendar"></i> Jadwal</li>
       </ol>
-      <?php include "../notifikasi1.php"?>
+      <?php include "../../system/welcome.php"?>
     </div>
+    <?php $id_jadwal = $_GET['id_jadwal']; ?>
     <div align="right" class="col-lg-6">
       <a href="jadwal-hapus?id_jadwal=<?php echo $id_jadwal; ?>"
         onclick="javascript: return confirm('Anda yakin hapus?')">
@@ -24,7 +23,6 @@
     </div>
   </div><!-- /.row -->
   <?php 
-  include '../koneksi.php';
   $data = mysqli_query($koneksi,
     "SELECT *, dokter.nama_dokter
     FROM jadwal, dokter
@@ -34,13 +32,6 @@
     ?>
     <?php
     if(isset($_POST['submit'])){
-      session_start();
-            // koneksi database
-      include '../koneksi.php';
-            // menangkap data yang di kirim dari form
-      date_default_timezone_set("Asia/Jakarta");
-      $_SESSION['tanggal']  = date('Y-m-d');
-      $_SESSION['jam']      = date('h:i:s');
       $senin      = $_POST['senin'];
       $selasa     = $_POST['selasa'];
       $rabu       = $_POST['rabu'];
@@ -48,10 +39,9 @@
       $jumat      = $_POST['jumat'];
       $sabtu      = $_POST['sabtu'];
       $minggu     = $_POST['minggu'];
-            // menginput data ke database
+
       $edit=mysqli_query($koneksi,"UPDATE jadwal SET sen='$senin',sel='$selasa',rab='$rabu',
         kam='$kamis',jum='$jumat',sab='$sabtu',min='$minggu' WHERE id_jadwal='$id_jadwal'");
-            // mengalihkan halaman
       if($edit){
         echo "<script>alert('Berhasil Mengubah!!!');
         document.location='jadwal-dokter'</script>";

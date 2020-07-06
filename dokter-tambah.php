@@ -1,4 +1,3 @@
-<?php include "readme.php";?>
 <?php include "views/header.php"; ?>
 <nav>
   <div id="wrapper">
@@ -13,7 +12,7 @@
         <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li class="active"><i class="fa fa-plus"></i> Dokter</li>
       </ol>
-      <?php include "../notifikasi1.php"?>
+      <?php include "../../system/welcome.php"?>
     </div>
     <div class="col-lg-12">
       <div class="table-responsive">
@@ -30,8 +29,6 @@
                     <h3 align="center">Poliklinik</h3>
                     <?php
                     if(isset($_POST['tambah'])){
-                      include '../koneksi.php';
-                // menangkap data yang di kirim dari form
                       $nama_dokter = $_POST['nama_dokter'];
                       $status = '1';
                       $id_unit = $_POST['id_unit'];
@@ -111,7 +108,6 @@
                                     </thead>
                                     <tbody>
                                       <?php 
-                                      include '../koneksi.php';
                                       $no = 1;
                                       $data = mysqli_query($koneksi,
                                         "SELECT *,  IF (status='1', 'Aktif', 'Nonaktif') AS status,IF (kuota_status='1', 'Aktif', 'Nonaktif') AS kuota_status FROM dokter;");

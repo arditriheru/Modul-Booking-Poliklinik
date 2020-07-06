@@ -1,6 +1,4 @@
-<?php include "readme.php";?>
 <?php include "views/header.php"; ?>
-<?php  $id_tumbang = $_GET['id_tumbang']; ?>
 <nav>
   <div id="wrapper">
     <?php include "menu.php"; ?>   
@@ -15,7 +13,7 @@
         <li><a href="tumbang-detail?id_tumbang=<?php echo $id_tumbang?>"><i class="fa fa-eye"></i> Detail</a></li>
         <li class="active"><i class="fa fa-edit"></i> Form</li>
       </ol>
-      <?php include "../notifikasi1.php"?>
+      <?php include "../../system/welcome.php"?>
       <div class="alert alert-danger alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <font size='3'>Jika pasien melakukan perubahan jadwal, hapus jadwal sebelumnya dan tambahkan jadwal baru!</font>
@@ -23,7 +21,7 @@
     </div>
   </div><!-- /.row -->
   <?php 
-  include '../koneksi.php';
+  $id_tumbang = $_GET['id_tumbang'];
   $data = mysqli_query($koneksi,
     "SELECT *, tumbang_petugas.nama_petugas, sesi.nama_sesi,
     IF (tumbang.status='1', 'Datang', 'Belum Datang') AS status
@@ -33,6 +31,7 @@
     AND tumbang.id_tumbang=$id_tumbang;");
   while($d = mysqli_fetch_array($data)){
     $jadwal = $d['jadwal'];
+
     function format_jadwal($jadwal)
     {
       $bulan = array (1 =>   'Januari',
@@ -54,16 +53,13 @@
     ?>
     <?php
     if(isset($_POST['submit'])){
-            // koneksi database
-      include '../koneksi.php';
-      $id_tumbang = $_GET['id_tumbang'];
-            // menangkap data yang di kirim dari form
+      $id_tumbang       = $_GET['id_tumbang'];
       $id_catatan_medik = $_POST['id_catatan_medik'];
       $nama             = $_POST['nama'];
       $alamat           = $_POST['alamat'];
       $kontak           = $_POST['kontak'];
       $keterangan       = $_POST['keterangan'];
-            // menginput data ke database
+
       $edit=mysqli_query($koneksi,"UPDATE tumbang SET nama='$nama',alamat='$alamat',kontak='$kontak',keterangan='$keterangan' WHERE id_tumbang='$id_tumbang'");
       if($edit){
         echo "<script>alert('Berhasil Mengubah!!!');
@@ -122,6 +118,5 @@
       </div>
     </div><!-- /.row -->
   <?php } ?>
-</div><br><br><?php include "../copyright.php";?><br><br><!-- /#page-wrapper -->
 </div><!-- /#wrapper -->
 <?php include "views/footer.php"; ?>

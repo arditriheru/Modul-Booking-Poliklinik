@@ -1,4 +1,3 @@
-<?php include "readme.php";?>
 <?php include "views/header.php"; ?>
 <nav>
   <div id="wrapper">
@@ -13,12 +12,11 @@
         <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li class="active"><i class="fa fa-edit"></i> Form</a></li>
       </ol>
-      <?php include "../notifikasi1.php"?>
+     <?php include "../../system/welcome.php"?>
     </div>
     <div class="col-lg-6">
       <div class="table-responsive">
         <?php 
-        include '../koneksi.php';
         $id_register = $_GET['id_register'];
         $data = mysqli_query($koneksi,"SELECT * FROM mr_pasien WHERE id_register=$id_register;");
         while($d = mysqli_fetch_array($data)){
@@ -30,10 +28,6 @@
         ?>
         <?php
         if(isset($_POST['polisubmit'])){
-          include '../koneksi.php';
-          date_default_timezone_set("Asia/Jakarta");
-          $tanggal=date('Y-m-d');
-          $jam=date("h:i:sa");
                 // menangkap data yang di kirim dari form
           $id_catatan_medik = $_POST['id_catatan_medik'];
           $nama             = $_POST['nama'];
@@ -42,14 +36,13 @@
           $id_dokter        = $_POST['id_dokter'];
           $booking_tanggal  = $_POST['booking_tanggal'];
           $id_sesi          = $_POST['id_sesi'];
-          $tanggal          = $tanggal;
-          $jam              = $jam;
+          $tanggal          = $tanggalsekarang;
+          $jam              = $jamsekarang;
           $status           = '2';
           $keterangan       = $_POST['keterangan'];
-
-          $tglsekarang  = new DateTime();
-          $jadwal     = new DateTime("$booking_tanggal");
-          $selisih      = $tglsekarang->diff($jadwal)->format("%a");
+          $tglsekarang      = new DateTime();
+          $jadwal           = new DateTime("$booking_tanggal");
+          $selisih          = $tglsekarang->diff($jadwal)->format("%a");
                 // cek antrian
           $a = mysqli_query($koneksi,
             "SELECT COUNT(*) AS antrian
@@ -97,7 +90,6 @@
             // Cek kuota_status tidak aktif
             include 'booking-tambah-proses.php';
           }else{
-            include '../koneksi.php';
             $namahari = date('l', strtotime($booking_tanggal));
             $e = mysqli_query($koneksi,
               "SELECT kuota, kuota_hari FROM dokter WHERE id_dokter='$id_dokter';");
@@ -165,7 +157,6 @@
                   <p style="color:red;"><?php echo ($error['id_dokter']) ? $error['id_dokter'] : ''; ?></p>
                   <option disabled selected>Pilih</option>
                   <?php 
-                  include '../koneksi.php';
                   $data = mysqli_query($koneksi,
                     "SELECT * FROM dokter WHERE status=1;");
                   while($d = mysqli_fetch_array($data)){
@@ -188,7 +179,6 @@
                 <p style="color:red;"><?php echo ($error['id_sesi']) ? $error['id_sesi'] : ''; ?></p>
                 <option disabled selected>Pilih</option>
                 <?php 
-                include '../koneksi.php';
                 $data = mysqli_query($koneksi,
                   "SELECT * FROM sesi;");
                 while($d = mysqli_fetch_array($data)){
